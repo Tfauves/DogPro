@@ -4,6 +4,8 @@ package com.careerdevs.conqureTheWalk.controllers;
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,5 +20,10 @@ public class DogController {
     @GetMapping
     public @ResponseBody List<Dog> geyAllDogs() {
        return repository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
+        return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 }

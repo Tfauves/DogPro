@@ -11,12 +11,16 @@ public class Dog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String breed;
+    private String name;
+    private Integer age;
     private String energyLvl;
 
     public Dog() {}
 
-    public Dog(String breed, String energyLvl) {
+    public Dog(String breed, String name, Integer age, String energyLvl) {
         this.breed= breed;
+        this.name = name;
+        this.age = age;
         this.energyLvl = energyLvl;
     }
 
@@ -42,5 +46,21 @@ public class Dog {
 
     public void setEnergyLvl(String energyLvl) {
         this.energyLvl = energyLvl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
