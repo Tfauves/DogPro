@@ -22,6 +22,9 @@ public class DogController {
        return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Dog> getById(@PathVariable)
+
     @PostMapping
     public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
