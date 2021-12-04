@@ -1,26 +1,31 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String breed;
     private String name;
     private Integer age;
+    private Integer weight;
+    private String sex;
+
+    @OneToMany
+    private String breed;
+
+    @OneToOne
     private String energyLvl;
 
     public Dog() {}
 
-    public Dog(String breed, String name, Integer age, String energyLvl) {
-        this.breed= breed;
+    public Dog(String name, Integer age, Integer weight, String sex, String breed, String energyLvl) {
         this.name = name;
         this.age = age;
+        this.weight = weight;
+        this.sex = sex;
+        this.breed = breed;
         this.energyLvl = energyLvl;
     }
 
@@ -62,5 +67,21 @@ public class Dog {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }
