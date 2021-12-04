@@ -18,7 +18,7 @@ public class DogController {
     private DogRepository repository;
 
     @GetMapping
-    public @ResponseBody List<Dog> geyAllDogs() {
+    public @ResponseBody List<Dog> getAllDogs() {
        return repository.findAll();
     }
 
