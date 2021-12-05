@@ -1,9 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Journal {
@@ -11,6 +8,7 @@ public class Journal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String entry;
+
 
     public Journal() {}
 

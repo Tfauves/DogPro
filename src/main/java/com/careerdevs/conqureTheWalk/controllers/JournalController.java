@@ -15,6 +15,8 @@ public class JournalController {
     @Autowired
     private JournalRepository repository;
 
+
+
     @GetMapping("/{journalId}")
     public @ResponseBody
     Journal getById(@PathVariable Long journalId) {

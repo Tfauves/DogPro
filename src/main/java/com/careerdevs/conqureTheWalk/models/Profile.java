@@ -1,9 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Profile {
@@ -12,8 +9,9 @@ public class Profile {
     private Long id;
     private String name;
 
-
-//    private Journal journal;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "journal_id")
+    private Journal journal;
 
     public Profile() {}
 
@@ -36,12 +34,12 @@ public class Profile {
     public void setName(String name) {
         this.name = name;
     }
-//
-//    public Journal getJournal() {
-//        return journal;
-//    }
-//
-//    public void setJournal(Journal journal) {
-//        this.journal = journal;
-//    }
+
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
 }
