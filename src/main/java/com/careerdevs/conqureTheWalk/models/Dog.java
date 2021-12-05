@@ -12,10 +12,10 @@ public class Dog {
     private Integer weight;
     private String sex;
 
-    @OneToMany
+
     private String breed;
 
-    @OneToOne
+
     private String energyLvl;
 
     public Dog() {}

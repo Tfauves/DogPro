@@ -13,7 +13,7 @@ public class Profile {
     private String name;
 
 
-    private Journal journal;
+//    private Journal journal;
 
     public Profile() {}
 
@@ -36,12 +36,12 @@ public class Profile {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Journal getJournal() {
-        return journal;
-    }
-
-    public void setJournal(Journal journal) {
-        this.journal = journal;
-    }
+//
+//    public Journal getJournal() {
+//        return journal;
+//    }
+//
+//    public void setJournal(Journal journal) {
+//        this.journal = journal;
+//    }
 }
