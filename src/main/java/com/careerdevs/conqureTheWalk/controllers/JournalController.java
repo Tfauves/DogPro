@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/journal")
+@RequestMapping("/api/journal")
 public class JournalController {
     @Autowired
     private JournalRepository repository;
