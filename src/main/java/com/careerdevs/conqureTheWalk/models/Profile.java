@@ -9,7 +9,7 @@ public class Profile {
     private Long id;
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "journal_id")
     private Journal journal;
 

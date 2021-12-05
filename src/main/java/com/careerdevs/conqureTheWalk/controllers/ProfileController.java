@@ -34,9 +34,13 @@ public class ProfileController {
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
-    @PutMapping("/journal/{id}")
-    public @ResponseBody Profile addJournal(@PathVariable Long id, @RequestBody Journal journal) {
-        Profile profile = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    @PutMapping("/journal")
+    public Profile addJournal(@RequestBody Profile pro) {
+        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Journal journal = journal_repository.save(pro.getJournal());
+        profile.setJournal(journal);
         return repository.save(profile);
     }
+
+
 }
