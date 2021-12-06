@@ -1,18 +1,22 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Journal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String entry;
+
+    @OneToMany
+    @JoinColumn(name = "entry_id", referencedColumnName = "id")
+    private List<Entry> entry;
 
 
     public Journal() {}
 
-    public Journal(String entry) {
+    public Journal(List<Entry> entry) {
         this.entry = entry;
     }
 
@@ -24,11 +28,11 @@ public class Journal {
         this.id = id;
     }
 
-    public String getEntry() {
+    public List<Entry> getEntry() {
         return entry;
     }
 
-    public void setEntry(String entry) {
+    public void setEntry(List<Entry> entry) {
         this.entry = entry;
     }
 }

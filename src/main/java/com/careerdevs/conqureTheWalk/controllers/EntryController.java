@@ -26,4 +26,5 @@ public class EntryController {
     public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
+
 }
