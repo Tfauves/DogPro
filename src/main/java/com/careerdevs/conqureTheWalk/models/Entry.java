@@ -1,21 +1,24 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String timeStamp;
+//    private String timeStamp;
+    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+    @ManyToOne
+    @JoinColumn(name = "activity_id", referencedColumnName = "id")
+    private Activity activity;
 
     public Entry() {}
 
-    public Entry(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public Entry(Activity activity) {
+        this.activity = activity;
     }
 
     public Long getId() {
@@ -26,11 +29,19 @@ public class Entry {
         this.id = id;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }
