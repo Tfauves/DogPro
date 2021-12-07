@@ -42,4 +42,9 @@ public class ProfileController {
         return repository.save(profile);
     }
 
+    @PutMapping("{id}")
+    public @ResponseBody Profile updateById(@PathVariable Long id) {
+
+    }
+
 }

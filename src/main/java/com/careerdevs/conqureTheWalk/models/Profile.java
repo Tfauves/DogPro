@@ -15,8 +15,9 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(String name) {
+    public Profile(String name, Journal journal) {
         this.name = name;
+        this.journal = journal;
     }
 
     public Long getId() {
