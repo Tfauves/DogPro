@@ -1,5 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,9 +11,16 @@ public class Journal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @JsonIncludeProperties("id")
+    private Profile profile;
+
     @OneToMany
     @JoinColumn(name = "entry_id", referencedColumnName = "id")
     private List<Entry> entry;
+
+
 
 
     public Journal() {}
@@ -34,5 +43,13 @@ public class Journal {
 
     public void setEntry(List<Entry> entry) {
         this.entry = entry;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

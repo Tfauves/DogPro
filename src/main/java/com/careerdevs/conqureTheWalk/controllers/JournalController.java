@@ -10,12 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/journal")
 public class JournalController {
     @Autowired
     private JournalRepository repository;
+
+    @GetMapping
+    public List<Journal> getAll() {
+        return repository.findAll();
+    }
 
     @GetMapping("/{journalId}")
     public @ResponseBody
@@ -33,6 +40,7 @@ public class JournalController {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
+        if (updateData.getProfile() != null) journal.setProfile(updateData.getProfile());
 
         return repository.save(journal);
     }
