@@ -43,8 +43,20 @@ public class ProfileController {
     }
 
     @PutMapping("{id}")
-    public @ResponseBody Profile updateById(@PathVariable Long id) {
+    public @ResponseBody Profile updateById(@PathVariable Long id, @RequestBody Profile updateData) {
+        Profile profile = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+        if (updateData.getName() != null) profile.setName(updateData.getName());
+        if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
+
+        return repository.save(profile);
+
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
 }
