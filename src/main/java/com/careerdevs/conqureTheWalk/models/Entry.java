@@ -10,7 +10,8 @@ public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private String timeStamp;
+    private String duration;
+    private String goal;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     @ManyToOne
@@ -20,8 +21,11 @@ public class Entry {
 
     public Entry() {}
 
-    public Entry(Activity activity) {
+    public Entry(Timestamp timestamp,Activity activity, String duration, String goal) {
+        this.timestamp = timestamp;
         this.activity = activity;
+        this.duration = duration;
+        this.goal = goal;
     }
 
     public Long getId() {
@@ -46,5 +50,21 @@ public class Entry {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
     }
 }

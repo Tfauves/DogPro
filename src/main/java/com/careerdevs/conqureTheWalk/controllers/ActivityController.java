@@ -25,4 +25,10 @@ public class ActivityController {
     public ResponseEntity<Activity> createActivity(@RequestBody Activity newActivity) {
         return new ResponseEntity<>(repository.save(newActivity), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> destroyActivity(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
 }

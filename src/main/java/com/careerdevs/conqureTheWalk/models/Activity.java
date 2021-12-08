@@ -11,15 +11,15 @@ public class Activity {
     @GeneratedValue
     private Long id;
     private String action;
-    private String duration;
-    private String goal;
+//    private String duration;
+//    private String goal;
 
     public Activity() {}
 
-    public Activity(String action, String duration, String goal) {
+    public Activity(String action) {
         this.action = action;
-        this.duration = duration;
-        this.goal = goal;
+//        this.duration = duration;
+//        this.goal = goal;
     }
 
     public Long getId() {
@@ -38,19 +38,19 @@ public class Activity {
         this.action = action;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getGoal() {
-        return goal;
-    }
-
-    public void setGoal(String goal) {
-        this.goal = goal;
-    }
+//    public String getDuration() {
+//        return duration;
+//    }
+//
+//    public void setDuration(String duration) {
+//        this.duration = duration;
+//    }
+//
+//    public String getGoal() {
+//        return goal;
+//    }
+//
+//    public void setGoal(String goal) {
+//        this.goal = goal;
+//    }
 }
