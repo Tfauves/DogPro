@@ -16,11 +16,9 @@ public class Journal {
     @JsonIncludeProperties("id")
     private Profile profile;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "entry_id", referencedColumnName = "id")
     private List<Entry> entry;
-
-
 
 
     public Journal() {}

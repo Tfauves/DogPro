@@ -1,6 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -17,6 +18,12 @@ public class Entry {
     @ManyToOne
     @JoinColumn(name = "activity_id", referencedColumnName = "id")
     private Activity activity;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "journal_id", referencedColumnName = "id")
+    @JsonIncludeProperties("id")
+    private Journal journal;
+
 
     public Entry() {}
 
