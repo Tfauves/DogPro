@@ -16,7 +16,6 @@ public class Entry {
 
     @ManyToOne
     @JoinColumn(name = "activity_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("action, duration")
     private Activity activity;
 
     public Entry() {}

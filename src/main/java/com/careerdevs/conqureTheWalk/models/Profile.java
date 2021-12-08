@@ -1,5 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Profile {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "journal_id")
+    @JsonIncludeProperties("id")
     private Journal journal;
 
     public Profile() {}
