@@ -12,12 +12,14 @@ public class Activity {
     private Long id;
     private String action;
     private String duration;
+    private String goal;
 
     public Activity() {}
 
-    public Activity(String action, String duration) {
+    public Activity(String action, String duration, String goal) {
         this.action = action;
         this.duration = duration;
+        this.goal = goal;
     }
 
     public Long getId() {
@@ -42,5 +44,13 @@ public class Activity {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
     }
 }
