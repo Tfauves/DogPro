@@ -27,4 +27,10 @@ public class EntryController {
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> destroyEntry(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
 }

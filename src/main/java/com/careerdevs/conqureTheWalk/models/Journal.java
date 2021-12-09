@@ -23,9 +23,9 @@ public class Journal {
 
     public Journal() {}
 
-    public Journal(List<Entry> entry) {
-        this.entry = entry;
-    }
+//    public Journal(List<Entry> entry) {
+//        this.entry = entry;
+//    }
 
     public Long getId() {
         return id;
@@ -50,4 +50,5 @@ public class Journal {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
 }
