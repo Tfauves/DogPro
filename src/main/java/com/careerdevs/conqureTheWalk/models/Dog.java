@@ -1,6 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Dog {
@@ -13,21 +14,19 @@ public class Dog {
     private String sex;
 
 
-    private String breed;
 
-
-    private String energyLvl;
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, String breed, String energyLvl) {
+    public Dog(String name, Integer age, Integer weight, String sex) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
-        this.breed = breed;
-        this.energyLvl = energyLvl;
+
     }
+
+
 
     public Long getId() {
         return id;
@@ -35,22 +34,6 @@ public class Dog {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public String getEnergyLvl() {
-        return energyLvl;
-    }
-
-    public void setEnergyLvl(String energyLvl) {
-        this.energyLvl = energyLvl;
     }
 
     public String getName() {
@@ -84,4 +67,5 @@ public class Dog {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
 }
