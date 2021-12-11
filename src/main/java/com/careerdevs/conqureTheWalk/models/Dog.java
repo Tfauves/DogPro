@@ -13,20 +13,19 @@ public class Dog {
     private Integer weight;
     private String sex;
 
-
+    @OneToMany
+    private List<Breed> breeds;
 
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex) {
+    public Dog(String name, Integer age, Integer weight, String sex, List<Breed> breeds) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
-
+        this.breeds = breeds;
     }
-
-
 
     public Long getId() {
         return id;
@@ -68,4 +67,11 @@ public class Dog {
         this.sex = sex;
     }
 
+    public List<Breed> getBreeds() {
+        return breeds;
+    }
+
+    public void setBreeds(List<Breed> breeds) {
+        this.breeds = breeds;
+    }
 }
