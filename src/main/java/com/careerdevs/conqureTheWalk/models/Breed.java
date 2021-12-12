@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 public class Breed {
@@ -15,16 +14,13 @@ public class Breed {
 
     private String type;
     private String breedGroup;
-    private String attributes;
 
 
     public Breed() {}
 
-    public Breed(String type, String breedGroup, String attributes) {
+    public Breed(String type, String breedGroup) {
         this.type = type;
         this.breedGroup = breedGroup;
-        this.attributes = attributes;
-
 
     }
 
@@ -52,12 +48,4 @@ public class Breed {
         this.breedGroup = breedGroup;
     }
 
-
-    public String getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(String attributes) {
-        this.attributes = attributes;
-    }
 }
