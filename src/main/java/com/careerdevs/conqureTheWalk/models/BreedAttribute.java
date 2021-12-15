@@ -1,9 +1,8 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
+import javax.persistence.*;
 
 @Entity
 public class BreedAttribute {
@@ -12,6 +11,12 @@ public class BreedAttribute {
     private Long id;
     private String attributeName;
     private String attributeValue;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "breed_id", referencedColumnName = "id")
+    @JsonIncludeProperties("id")
+    private Breed breed;
+
 
     public BreedAttribute() {}
 

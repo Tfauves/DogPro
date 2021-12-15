@@ -26,4 +26,12 @@ public class BreedAttributeController {
     public ResponseEntity<BreedAttribute> createAttribute(@RequestBody BreedAttribute newAttribute) {
         return new ResponseEntity<>(repository.save(newAttribute), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> destroyAttribute(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
+
 }

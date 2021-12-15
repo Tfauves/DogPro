@@ -1,26 +1,27 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Breed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String type;
     private String breedGroup;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "breed")
+    private List<BreedAttribute> breedAttributes;
 
 
     public Breed() {}
 
-    public Breed(String type, String breedGroup) {
+    public Breed(String type, String breedGroup, List<BreedAttribute> breedAttributes) {
         this.type = type;
         this.breedGroup = breedGroup;
+        this.breedAttributes = breedAttributes;
 
     }
 
@@ -48,4 +49,11 @@ public class Breed {
         this.breedGroup = breedGroup;
     }
 
+    public List<BreedAttribute> getBreedAttributes() {
+        return breedAttributes;
+    }
+
+    public void setBreedAttributes(List<BreedAttribute> breedAttributes) {
+        this.breedAttributes = breedAttributes;
+    }
 }
