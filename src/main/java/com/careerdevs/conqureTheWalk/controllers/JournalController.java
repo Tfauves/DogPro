@@ -40,6 +40,17 @@ public class JournalController {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
 
+    @PutMapping("/entry/{journalId}")
+    public @ResponseBody Journal addEntry(@PathVariable Long journalId, @RequestBody Journal journalEntry) {
+        Journal journal = repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (journalEntry.getEntry() != null) journal.setEntry(journalEntry.getEntry());
+
+        return repository.save(journal);
+    }
+
+
+
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
