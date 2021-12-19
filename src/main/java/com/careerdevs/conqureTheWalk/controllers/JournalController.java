@@ -1,7 +1,9 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
+import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,14 @@ import java.util.List;
 public class JournalController {
     @Autowired
     private JournalRepository repository;
+<<<<<<< HEAD
 //get all journals
+=======
+
+    @Autowired
+    EntryRepository entry_repository;
+
+>>>>>>> c46a2b104ca752a8a647ee88aa7702fea832c8c6
     @GetMapping
     public List<Journal> getAll() {
         return repository.findAll();
@@ -34,7 +43,22 @@ public class JournalController {
     public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal) {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
+<<<<<<< HEAD
 //update journal
+=======
+
+    @PutMapping("/entry/{journalId}")
+    public @ResponseBody Journal addEntry(@PathVariable Long journalId, @RequestBody Journal journalEntry) {
+        Journal journal = repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (journalEntry.getEntry() != null) journal.setEntry(journalEntry.getEntry());
+
+        return repository.save(journal);
+    }
+
+
+
+>>>>>>> c46a2b104ca752a8a647ee88aa7702fea832c8c6
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));

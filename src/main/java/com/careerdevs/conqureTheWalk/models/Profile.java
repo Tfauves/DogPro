@@ -14,7 +14,7 @@ public class Profile {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "journal_id")
-    @JsonIncludeProperties("id")
+    @JsonIncludeProperties({"id", "entry"})
     private Journal journal;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
