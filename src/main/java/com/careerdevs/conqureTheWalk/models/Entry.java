@@ -19,7 +19,7 @@ public class Entry {
     @JoinColumn(name = "activity_id", referencedColumnName = "id")
     private Activity activity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
     private Journal journal;

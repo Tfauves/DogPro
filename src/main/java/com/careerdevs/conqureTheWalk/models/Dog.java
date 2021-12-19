@@ -16,6 +16,9 @@ public class Dog {
     @OneToMany
     private List<Breed> breeds;
 
+    @ManyToOne
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    private Profile owner;
 
     public Dog() {}
 

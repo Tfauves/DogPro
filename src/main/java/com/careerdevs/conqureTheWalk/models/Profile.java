@@ -3,6 +3,7 @@ package com.careerdevs.conqureTheWalk.models;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Profile {
@@ -15,6 +16,9 @@ public class Profile {
     @JoinColumn(name = "journal_id")
     @JsonIncludeProperties("id")
     private Journal journal;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 
     public Profile() {}
 

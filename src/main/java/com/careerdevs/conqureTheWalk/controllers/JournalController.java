@@ -18,23 +18,23 @@ import java.util.List;
 public class JournalController {
     @Autowired
     private JournalRepository repository;
-
+//get all journals
     @GetMapping
     public List<Journal> getAll() {
         return repository.findAll();
     }
-
+//get journal by id
     @GetMapping("/{journalId}")
     public @ResponseBody
     Journal getById(@PathVariable Long journalId) {
         return repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
+//create a journal
     @PostMapping
     public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal) {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
-
+//update journal
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -43,6 +43,12 @@ public class JournalController {
         if (updateData.getProfile() != null) journal.setProfile(updateData.getProfile());
 
         return repository.save(journal);
+    }
+//delete journal
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> destroyJournal(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
 }
