@@ -1,5 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Profile {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "journal_id")
-    @JsonIncludeProperties({"id", "entry"})
+    @JsonIgnoreProperties("profile")
     private Journal journal;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

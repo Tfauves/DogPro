@@ -1,5 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Journal {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("id")
 //    , mappedBy = "journal"
     private List<Entry> entry;
 
