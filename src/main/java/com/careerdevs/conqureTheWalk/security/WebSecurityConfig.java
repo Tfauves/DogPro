@@ -2,6 +2,7 @@ package com.careerdevs.conqureTheWalk.security;
 
 
 import com.careerdevs.conqureTheWalk.security.jwt.AuthEntryPointJwt;
+import com.careerdevs.conqureTheWalk.security.jwt.AuthTokenFilter;
 import com.careerdevs.conqureTheWalk.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
