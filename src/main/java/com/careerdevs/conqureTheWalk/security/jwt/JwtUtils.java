@@ -14,7 +14,7 @@ import java.util.Date;
 public class JwtUtils {
     private static Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${REST-vehicle-rental.app.jwtSecret}")
+    @Value("${ConquerTheWalk.app.jwtSecret}")
     private String jwtSecret;
 
     public Boolean validateJwtToken(String authToken) {
