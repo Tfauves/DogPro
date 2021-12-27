@@ -7,6 +7,7 @@ import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,6 +25,7 @@ public class ProfileController {
     private JournalRepository journal_repository;
 //get all profiles
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     List<Profile> getAll() {
         return repository.findAll();
@@ -60,7 +62,8 @@ public class ProfileController {
 
     }
 //delete profile
-    @DeleteMapping("{id}")
+@PreAuthorize("hasRole('ADMIN')")
+@DeleteMapping("{id}")
     public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
