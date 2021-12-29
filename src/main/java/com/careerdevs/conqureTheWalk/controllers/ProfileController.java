@@ -25,7 +25,7 @@ public class ProfileController {
     private JournalRepository journal_repository;
 //get all profiles
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     List<Profile> getAll() {
         return repository.findAll();
@@ -62,7 +62,7 @@ public class ProfileController {
 
     }
 //delete profile
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 @DeleteMapping("{id}")
     public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
         repository.deleteById(id);

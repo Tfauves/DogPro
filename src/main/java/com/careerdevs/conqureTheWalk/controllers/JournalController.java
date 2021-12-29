@@ -27,7 +27,7 @@ public class JournalController {
     EntryRepository entry_repository;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public List<Journal> getAll() {
         return repository.findAll();
     }
@@ -65,7 +65,7 @@ public class JournalController {
     }
 //delete journal
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> destroyJournal(@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);

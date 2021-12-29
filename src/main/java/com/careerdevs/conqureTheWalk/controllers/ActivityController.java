@@ -18,19 +18,19 @@ public class ActivityController {
     private ActivityRepository repository;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public List<Activity> getAll() {
         return repository.findAll();
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Activity> createActivity(@RequestBody Activity newActivity) {
         return new ResponseEntity<>(repository.save(newActivity), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> destroyActivity(@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
