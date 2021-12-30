@@ -49,7 +49,8 @@ public class ProfileController {
         if(currentUser == null) {
             return null;
         }
-        return repository.fi
+        return repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
     }
 
 
