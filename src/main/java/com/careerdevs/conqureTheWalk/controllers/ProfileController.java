@@ -3,9 +3,11 @@ package com.careerdevs.conqureTheWalk.controllers;
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
+import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class ProfileController {
     @Autowired
     private DogRepository dog_repository;
 
+    @Autowired
+    UserService userService;
+
 //get all profiles
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -36,6 +41,18 @@ public class ProfileController {
     List<Profile> getAll() {
         return repository.findAll();
     }
+
+    @GetMapping("/self")
+    public @ResponseBody Profile getSelf() {
+        User currentUser = userService.getCurrentUser();
+
+        if(currentUser == null) {
+            return null;
+        }
+        return repository.fi
+    }
+
+
 //create a new profile
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
