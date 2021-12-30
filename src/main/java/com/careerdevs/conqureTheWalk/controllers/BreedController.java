@@ -33,6 +33,8 @@ public class BreedController {
         Breed breed = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (updateDate.getType() != null) breed.setType(updateDate.getType());
         if (updateDate.getBreedGroup() != null) breed.setBreedGroup(updateDate.getBreedGroup());
+        if (updateDate.getBreedAttributes() != null) breed.setBreedAttributes(updateDate.getBreedAttributes());
+
         return repository.save(breed);
     }
 
