@@ -42,6 +42,7 @@ public class ProfileController {
         return repository.findAll();
     }
 
+    //get self
     @GetMapping("/self")
     public @ResponseBody Profile getSelf() {
         User currentUser = userService.getCurrentUser();
@@ -53,10 +54,15 @@ public class ProfileController {
 
     }
 
-
 //create a new profile
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 //create a new profile with a journal
