@@ -1,7 +1,9 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
+import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class ProfileController {
 
     @Autowired
     private JournalRepository journal_repository;
+
+    @Autowired
+    private DogRepository dog_repository;
+
 //get all profiles
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -50,6 +56,15 @@ public class ProfileController {
         profile.setJournal(journal);
         return repository.save(profile);
     }
+    //add dog to profile
+    @PutMapping("/dog")
+    public Profile addDog(@RequestBody Profile pro) {
+        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (pro.getDogs() != null) profile.setDogs(pro.getDogs());
+
+        return repository.save(profile);
+
+    }
 //update a profile
     @PutMapping("{id}")
     public @ResponseBody Profile updateById(@PathVariable Long id, @RequestBody Profile updateData) {
@@ -57,6 +72,7 @@ public class ProfileController {
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
         if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
+        if (updateData.getDogs() != null) profile.setDogs(updateData.getDogs());
 
         return repository.save(profile);
 

@@ -51,4 +51,12 @@ public class Profile {
     public void setJournal(Journal journal) {
         this.journal = journal;
     }
+
+    public List<Dog> getDogs() {
+        return dogs;
+    }
+
+    public void setDogs(List<Dog> dogs) {
+        this.dogs = dogs;
+    }
 }
