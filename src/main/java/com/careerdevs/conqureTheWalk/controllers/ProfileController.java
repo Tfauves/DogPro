@@ -68,6 +68,12 @@ public class ProfileController {
 //create a new profile with a journal
     @PostMapping("/journal")
     public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
         Journal newJournal = journal_repository.save(newProfile.getJournal());
         newJournal.setProfile(newProfile);
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
