@@ -1,5 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.careerdevs.conqureTheWalk.models.auth.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
@@ -21,9 +23,15 @@ public class Profile {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Dog> dogs;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
+    private User user;
+
     public Profile() {}
 
-    public Profile(String name, Journal journal) {
+    public Profile(User user, String name, Journal journal) {
+        this.user = user;
         this.name = name;
         this.journal = journal;
     }
@@ -58,5 +66,13 @@ public class Profile {
 
     public void setDogs(List<Dog> dogs) {
         this.dogs = dogs;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

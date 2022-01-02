@@ -3,9 +3,11 @@ package com.careerdevs.conqureTheWalk.controllers;
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
+import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,14 @@ public class ProfileController {
     @Autowired
     private DogRepository dog_repository;
 
+<<<<<<< HEAD
     //get all profiles
+=======
+    @Autowired
+    UserService userService;
+
+//get all profiles
+>>>>>>> 33617df18f8f5ddf07ed0c6356df449e40dbd941
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
@@ -37,15 +46,43 @@ public class ProfileController {
         return repository.findAll();
     }
 
+<<<<<<< HEAD
     //create a new profile
+=======
+    //get self
+    @GetMapping("/self")
+    public @ResponseBody Profile getSelf() {
+        User currentUser = userService.getCurrentUser();
+
+        if(currentUser == null) {
+            return null;
+        }
+        return repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    }
+
+//create a new profile
+>>>>>>> 33617df18f8f5ddf07ed0c6356df449e40dbd941
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
     //create a new profile with a journal
     @PostMapping("/journal")
     public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
         Journal newJournal = journal_repository.save(newProfile.getJournal());
         newJournal.setProfile(newProfile);
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
