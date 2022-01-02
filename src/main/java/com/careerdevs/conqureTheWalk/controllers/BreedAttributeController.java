@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,6 +27,16 @@ public class BreedAttributeController {
     @PostMapping
     public ResponseEntity<BreedAttribute> createAttribute(@RequestBody BreedAttribute newAttribute) {
         return new ResponseEntity<>(repository.save(newAttribute), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public @ResponseBody BreedAttribute updateAttribute(@PathVariable Long id, @RequestBody BreedAttribute updateData) {
+        BreedAttribute attribute = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (updateData.getAttributeName() != null) attribute.setAttributeName(updateData.getAttributeName());
+        if (updateData.getAttributeValue() != null) attribute.setAttributeValue(updateData.getAttributeValue());
+
+        return repository.save(attribute);
     }
 
     @DeleteMapping("/{id}")

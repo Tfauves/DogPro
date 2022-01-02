@@ -11,15 +11,11 @@ public class Activity {
     @GeneratedValue
     private Long id;
     private String action;
-//    private String duration;
-//    private String goal;
 
     public Activity() {}
 
     public Activity(String action) {
         this.action = action;
-//        this.duration = duration;
-//        this.goal = goal;
     }
 
     public Long getId() {

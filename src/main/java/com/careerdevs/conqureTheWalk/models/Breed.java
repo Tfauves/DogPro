@@ -9,7 +9,7 @@ public class Breed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
+    private String breedType;
     private String breedGroup;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "breed")
@@ -18,11 +18,10 @@ public class Breed {
 
     public Breed() {}
 
-    public Breed(String type, String breedGroup, List<BreedAttribute> breedAttributes) {
-        this.type = type;
+    public Breed(String breedType, String breedGroup, List<BreedAttribute> breedAttributes) {
+        this.breedType = breedType;
         this.breedGroup = breedGroup;
         this.breedAttributes = breedAttributes;
-
     }
 
     public Long getId() {
@@ -33,12 +32,12 @@ public class Breed {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getBreedType() {
+        return breedType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBreedType(String breedType) {
+        this.breedType = breedType;
     }
 
     public String getBreedGroup() {

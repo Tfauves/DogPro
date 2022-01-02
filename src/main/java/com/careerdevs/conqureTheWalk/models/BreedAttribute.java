@@ -14,7 +14,7 @@ public class BreedAttribute {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "breed_id", referencedColumnName = "id")
-    @JsonIncludeProperties("id")
+//    @JsonIncludeProperties("id")
     private Breed breed;
 
 

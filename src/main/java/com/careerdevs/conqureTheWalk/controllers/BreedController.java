@@ -31,7 +31,7 @@ public class BreedController {
     @PutMapping("/{id}")
     public @ResponseBody Breed updatedBreed(@PathVariable Long id, @RequestBody Breed updateDate) {
         Breed breed = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (updateDate.getType() != null) breed.setType(updateDate.getType());
+        if (updateDate.getBreedType() != null) breed.setBreedType(updateDate.getBreedType());
         if (updateDate.getBreedGroup() != null) breed.setBreedGroup(updateDate.getBreedGroup());
         if (updateDate.getBreedAttributes() != null) breed.setBreedAttributes(updateDate.getBreedAttributes());
 

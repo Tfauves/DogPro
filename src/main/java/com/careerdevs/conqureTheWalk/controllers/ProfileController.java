@@ -85,7 +85,7 @@ public class ProfileController {
 
     //delete profile
     //@PreAuthorize("hasRole('ADMIN')")
-@DeleteMapping("{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
