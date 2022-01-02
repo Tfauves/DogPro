@@ -19,9 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/journal")
 public class JournalController {
+
     @Autowired
     private JournalRepository repository;
-//get all journals
 
     @Autowired
     EntryRepository entry_repository;
@@ -31,20 +31,22 @@ public class JournalController {
     public List<Journal> getAll() {
         return repository.findAll();
     }
-//get journal by id
+
+    //get journal by id
     @GetMapping("/{journalId}")
     public @ResponseBody
     Journal getById(@PathVariable Long journalId) {
         return repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-//create a journal
+
+    //create a journal
     @PostMapping
     public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal) {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
 
-//update journal
 
+    //update journal
     @PutMapping("/entry/{journalId}")
     public @ResponseBody Journal addEntry(@PathVariable Long journalId, @RequestBody Journal journalEntry) {
         Journal journal = repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -63,7 +65,8 @@ public class JournalController {
 
         return repository.save(journal);
     }
-//delete journal
+
+    //delete journal
     @DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> destroyJournal(@PathVariable Long id) {

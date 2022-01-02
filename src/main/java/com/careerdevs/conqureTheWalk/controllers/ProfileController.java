@@ -29,26 +29,29 @@ public class ProfileController {
     @Autowired
     private DogRepository dog_repository;
 
-//get all profiles
+    //get all profiles
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     List<Profile> getAll() {
         return repository.findAll();
     }
-//create a new profile
+
+    //create a new profile
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
-//create a new profile with a journal
+
+    //create a new profile with a journal
     @PostMapping("/journal")
     public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
         Journal newJournal = journal_repository.save(newProfile.getJournal());
         newJournal.setProfile(newProfile);
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
-//add a journal to an existing profile
+
+    //add a journal to an existing profile
     @PutMapping("/add/journal")
     public Profile addJournal(@RequestBody Profile pro) {
         Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -56,6 +59,7 @@ public class ProfileController {
         profile.setJournal(journal);
         return repository.save(profile);
     }
+
     //add dog to profile
     @PutMapping("/dog")
     public Profile addDog(@RequestBody Profile pro) {
@@ -65,7 +69,8 @@ public class ProfileController {
         return repository.save(profile);
 
     }
-//update a profile
+
+    //update a profile
     @PutMapping("{id}")
     public @ResponseBody Profile updateById(@PathVariable Long id, @RequestBody Profile updateData) {
         Profile profile = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -77,8 +82,9 @@ public class ProfileController {
         return repository.save(profile);
 
     }
-//delete profile
-//@PreAuthorize("hasRole('ADMIN')")
+
+    //delete profile
+    //@PreAuthorize("hasRole('ADMIN')")
 @DeleteMapping("{id}")
     public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
         repository.deleteById(id);
