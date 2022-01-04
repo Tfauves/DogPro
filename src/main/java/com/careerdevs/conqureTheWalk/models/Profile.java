@@ -15,8 +15,8 @@ public class Profile {
     private Long id;
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "journal_id")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "profile")
+//    @JoinColumn(name = "journal_id")
     @JsonIgnoreProperties("profile")
     private Journal journal;
 

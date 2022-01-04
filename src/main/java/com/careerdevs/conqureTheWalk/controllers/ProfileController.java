@@ -31,14 +31,13 @@ public class ProfileController {
     @Autowired
     private DogRepository dog_repository;
 
-<<<<<<< HEAD
+
     //get all profiles
-=======
     @Autowired
     UserService userService;
 
 //get all profiles
->>>>>>> 33617df18f8f5ddf07ed0c6356df449e40dbd941
+
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
@@ -46,9 +45,9 @@ public class ProfileController {
         return repository.findAll();
     }
 
-<<<<<<< HEAD
+
     //create a new profile
-=======
+
     //get self
     @GetMapping("/self")
     public @ResponseBody Profile getSelf() {
@@ -62,7 +61,7 @@ public class ProfileController {
     }
 
 //create a new profile
->>>>>>> 33617df18f8f5ddf07ed0c6356df449e40dbd941
+
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
         User currentUser = userService.getCurrentUser();

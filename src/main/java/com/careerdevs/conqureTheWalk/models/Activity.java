@@ -34,19 +34,4 @@ public class Activity {
         this.action = action;
     }
 
-//    public String getDuration() {
-//        return duration;
-//    }
-//
-//    public void setDuration(String duration) {
-//        this.duration = duration;
-//    }
-//
-//    public String getGoal() {
-//        return goal;
-//    }
-//
-//    public void setGoal(String goal) {
-//        this.goal = goal;
-//    }
 }
