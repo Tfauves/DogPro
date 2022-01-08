@@ -123,7 +123,11 @@ public class ProfileController {
     //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
-        repository.deleteById(id);
+        User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            return null;
+        }
+        repository.deleteByUser_id(currentUser.getId());
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
