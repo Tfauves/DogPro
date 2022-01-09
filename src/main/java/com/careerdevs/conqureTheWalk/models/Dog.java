@@ -77,4 +77,12 @@ public class Dog {
     public void setBreeds(List<Breed> breeds) {
         this.breeds = breeds;
     }
+
+    public Profile getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Profile owner) {
+        this.owner = owner;
+    }
 }

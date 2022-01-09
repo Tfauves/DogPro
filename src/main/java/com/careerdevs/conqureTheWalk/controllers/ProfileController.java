@@ -46,8 +46,6 @@ public class ProfileController {
     }
 
 
-    //create a new profile
-
     //get self
     @GetMapping("/self")
     public @ResponseBody Profile getSelf() {
@@ -100,7 +98,8 @@ public class ProfileController {
     @PutMapping("/dog")
     public Profile addDog(@RequestBody Profile pro) {
         Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (pro.getDogs() != null) profile.setDogs(pro.getDogs());
+        Dog dog = dog_repository.findById(pro.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (pro.getDogs() != null) dog.setOwner(profile);
 
         return repository.save(profile);
 
@@ -109,7 +108,14 @@ public class ProfileController {
     //update a profile
     @PutMapping("{id}")
     public @ResponseBody Profile updateById(@PathVariable Long id, @RequestBody Profile updateData) {
-        Profile profile = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return null;
+        }
+
+        Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
         if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());

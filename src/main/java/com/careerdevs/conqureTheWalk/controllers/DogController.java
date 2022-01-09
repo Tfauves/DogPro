@@ -41,6 +41,7 @@ public class DogController {
         if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
         if (updates.getSex() != null) updatedDog.setSex(updatedDog.getSex());
+        if (updates.getOwner() != null) updatedDog.setOwner(updatedDog.getOwner());
         return repository.save(updatedDog);
 
     }
