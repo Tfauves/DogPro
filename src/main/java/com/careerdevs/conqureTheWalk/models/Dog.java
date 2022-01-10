@@ -1,5 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,16 +20,18 @@ public class Dog {
 
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @JsonIncludeProperties("id")
     private Profile owner;
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, List<Breed> breeds) {
+    public Dog(String name, Integer age, Integer weight, String sex, List<Breed> breeds, Profile owner) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
         this.breeds = breeds;
+        this.owner = owner;
     }
 
     public Long getId() {

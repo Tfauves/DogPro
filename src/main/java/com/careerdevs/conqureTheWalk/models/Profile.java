@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import javax.persistence.*;
 import java.util.List;
 
+// TODO: 1/9/2022 no display of the dog data also need to test the entry as no data is showing currently. 
 @Entity
 public class Profile {
     @Id

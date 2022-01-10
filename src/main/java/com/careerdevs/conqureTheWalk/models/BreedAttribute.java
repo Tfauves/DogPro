@@ -1,7 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
+// TODO: 1/9/2022 why attributes are not added to and displayed as breed info. 
 import javax.persistence.*;
 
 @Entity
