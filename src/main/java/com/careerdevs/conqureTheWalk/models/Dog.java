@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Dog {
@@ -16,7 +17,7 @@ public class Dog {
     private String sex;
 
     @OneToMany
-    private List<Breed> breeds;
+    private Set<Breed> breeds;
 
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -25,12 +26,11 @@ public class Dog {
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, List<Breed> breeds, Profile owner) {
+    public Dog(String name, Integer age, Integer weight, String sex, Profile owner) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
-        this.breeds = breeds;
         this.owner = owner;
     }
 
@@ -74,11 +74,11 @@ public class Dog {
         this.sex = sex;
     }
 
-    public List<Breed> getBreeds() {
+    public Set<Breed> getBreeds() {
         return breeds;
     }
 
-    public void setBreeds(List<Breed> breeds) {
+    public void setBreeds(Set<Breed> breeds) {
         this.breeds = breeds;
     }
 

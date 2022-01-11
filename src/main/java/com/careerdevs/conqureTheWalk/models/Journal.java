@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Journal {
@@ -21,13 +22,13 @@ public class Journal {
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIgnoreProperties("id")
 //    , mappedBy = "journal"
-    private List<Entry> entry;
+    private Set<Entry> entry;
 
 
     public Journal() {}
 
-    public Journal(List<Entry> entry) {
-        this.entry = entry;
+    public Journal(Profile profile) {
+        this.profile = profile;
     }
 
     public Long getId() {
@@ -38,11 +39,11 @@ public class Journal {
         this.id = id;
     }
 
-    public List<Entry> getEntry() {
+    public Set<Entry> getEntry() {
         return entry;
     }
 
-    public void setEntry(List<Entry> entry) {
+    public void setEntry(Set<Entry> entry) {
         this.entry = entry;
     }
 

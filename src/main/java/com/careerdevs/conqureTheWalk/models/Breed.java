@@ -2,6 +2,7 @@ package com.careerdevs.conqureTheWalk.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -13,15 +14,14 @@ public class Breed {
     private String breedGroup;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "breed")
-    private List<BreedAttribute> breedAttributes;
+    private Set<BreedAttribute> breedAttributes;
 
 
     public Breed() {}
 
-    public Breed(String breedType, String breedGroup, List<BreedAttribute> breedAttributes) {
+    public Breed(String breedType, String breedGroup) {
         this.breedType = breedType;
         this.breedGroup = breedGroup;
-        this.breedAttributes = breedAttributes;
     }
 
     public Long getId() {
@@ -48,11 +48,11 @@ public class Breed {
         this.breedGroup = breedGroup;
     }
 
-    public List<BreedAttribute> getBreedAttributes() {
+    public Set<BreedAttribute> getBreedAttributes() {
         return breedAttributes;
     }
 
-    public void setBreedAttributes(List<BreedAttribute> breedAttributes) {
+    public void setBreedAttributes(Set<BreedAttribute> breedAttributes) {
         this.breedAttributes = breedAttributes;
     }
 }
