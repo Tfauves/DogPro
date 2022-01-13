@@ -48,4 +48,12 @@ public class BreedAttribute {
     public void setAttributeValue(String attributeValue) {
         this.attributeValue = attributeValue;
     }
+
+    public Breed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed = breed;
+    }
 }
