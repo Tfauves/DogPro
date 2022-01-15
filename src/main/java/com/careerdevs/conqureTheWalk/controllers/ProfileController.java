@@ -72,7 +72,7 @@ public class ProfileController {
     }
 
     //create a new profile with a journal
-    @PostMapping("/journal")
+    @PostMapping("/new")
     public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
         User currentUser = userService.getCurrentUser();
 
@@ -86,13 +86,13 @@ public class ProfileController {
     }
 
     //add a journal to an existing profile
-    @PutMapping("/add/journal")
-    public Profile addJournal(@RequestBody Profile pro) {
-        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Journal journal = journal_repository.save(pro.getJournal());
-        profile.setJournal(journal);
-        return repository.save(profile);
-    }
+//    @PutMapping("/add/journal")
+//    public Profile addJournal(@RequestBody Profile pro) {
+//        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//        Journal journal = journal_repository.save(pro.getJournal());
+//        profile.setJournal(journal);
+//        return repository.save(profile);
+//    }
 
     //add dog to profile
     @PutMapping("/dog")
