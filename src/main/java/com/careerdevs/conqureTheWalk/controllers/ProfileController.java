@@ -127,9 +127,10 @@ public class ProfileController {
 
     //delete profile
     //@PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> destroyProfile(@PathVariable Long id) {
+    @DeleteMapping
+    public ResponseEntity<String> destroyProfile() {
         User currentUser = userService.getCurrentUser();
+
         if (currentUser == null) {
             return null;
         }
