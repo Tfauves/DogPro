@@ -45,11 +45,11 @@ public class DogController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
+    public ResponseEntity<Dog> createDogWithJournal(@RequestBody Dog newDog) {
 
         Journal newJournal = journalRepository.save(newDog.getJournal());
-        newJournal.setProfile(newProfile);
-        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
+        newJournal.setDog(newDog);
+        return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

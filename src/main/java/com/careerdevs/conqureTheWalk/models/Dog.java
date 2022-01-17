@@ -27,7 +27,7 @@ public class Dog {
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "dog")
 //    @JoinColumn(name = "journal_id")
-//    @JsonIgnoreProperties("profile")
+    @JsonIgnoreProperties("dog")
     private Journal journal;
 
     public Dog() {}

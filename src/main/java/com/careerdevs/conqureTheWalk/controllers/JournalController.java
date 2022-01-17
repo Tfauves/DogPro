@@ -61,7 +61,7 @@ public class JournalController {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
-        if (updateData.getProfile() != null) journal.setProfile(updateData.getProfile());
+        if (updateData.getDog()!= null) journal.setDog(updateData.getDog());
 
         return repository.save(journal);
     }
