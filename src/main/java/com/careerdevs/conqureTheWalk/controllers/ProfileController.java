@@ -24,9 +24,9 @@ public class ProfileController {
 
     @Autowired
     private ProfileRepository repository;
-
-    @Autowired
-    private JournalRepository journal_repository;
+//
+//    @Autowired
+//    private JournalRepository journal_repository;
 
     @Autowired
     private DogRepository dog_repository;
@@ -71,19 +71,19 @@ public class ProfileController {
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
-    //create a new profile with a journal
-    @PostMapping("/new")
-    public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
-        User currentUser = userService.getCurrentUser();
-
-        if (currentUser == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        newProfile.setUser(currentUser);
-        Journal newJournal = journal_repository.save(newProfile.getJournal());
-        newJournal.setProfile(newProfile);
-        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
-    }
+//    //create a new profile with a journal
+//    @PostMapping("/new")
+//    public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
+//        User currentUser = userService.getCurrentUser();
+//
+//        if (currentUser == null) {
+//            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//        }
+//        newProfile.setUser(currentUser);
+//        Journal newJournal = journal_repository.save(newProfile.getJournal());
+//        newJournal.setProfile(newProfile);
+//        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
+//    }
 
     //add a journal to an existing profile
 //    @PutMapping("/add/journal")
@@ -118,7 +118,7 @@ public class ProfileController {
         Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
-        if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
+//        if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
         if (updateData.getDogs() != null) profile.setDogs(updateData.getDogs());
 
         return repository.save(profile);

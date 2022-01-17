@@ -17,10 +17,10 @@ public class Profile {
     private Long id;
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "profile")
-//    @JoinColumn(name = "journal_id")
-    @JsonIgnoreProperties("profile")
-    private Journal journal;
+//    @OneToOne(fetch = FetchType.EAGER, mappedBy = "profile")
+////    @JoinColumn(name = "journal_id")
+//    @JsonIgnoreProperties("profile")
+//    private Journal journal;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Dog> dogs;
@@ -32,10 +32,9 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(User user, String name, Journal journal) {
+    public Profile(User user, String name) {
         this.user = user;
         this.name = name;
-        this.journal = journal;
     }
 
     public Long getId() {
@@ -54,13 +53,13 @@ public class Profile {
         this.name = name;
     }
 
-    public Journal getJournal() {
-        return journal;
-    }
-
-    public void setJournal(Journal journal) {
-        this.journal = journal;
-    }
+//    public Journal getJournal() {
+//        return journal;
+//    }
+//
+//    public void setJournal(Journal journal) {
+//        this.journal = journal;
+//    }
 
     public User getUser() {
         return user;

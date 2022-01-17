@@ -1,5 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
@@ -24,14 +25,20 @@ public class Dog {
     @JsonIncludeProperties("id")
     private Profile owner;
 
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "dog")
+//    @JoinColumn(name = "journal_id")
+//    @JsonIgnoreProperties("profile")
+    private Journal journal;
+
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, Profile owner) {
+    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
         this.owner = owner;
+        this.journal = journal;
     }
 
     public Long getId() {
@@ -88,5 +95,13 @@ public class Dog {
 
     public void setOwner(Profile owner) {
         this.owner = owner;
+    }
+
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
     }
 }

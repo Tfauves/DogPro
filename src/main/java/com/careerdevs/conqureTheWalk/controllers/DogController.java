@@ -2,7 +2,10 @@ package com.careerdevs.conqureTheWalk.controllers;
 
 
 import com.careerdevs.conqureTheWalk.models.Dog;
+import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
+import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,9 @@ public class DogController {
     @Autowired
     private DogRepository repository;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping
     public @ResponseBody List<Dog> getAllDogs() {
        return repository.findAll();
@@ -31,6 +37,19 @@ public class DogController {
     @PostMapping
     public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
+//        Journal newJournal = journal_repository.save(newProfile.getJournal());
+//        newJournal.setProfile(newProfile);
+        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
