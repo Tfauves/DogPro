@@ -14,9 +14,9 @@ public class Journal {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @JoinColumn(name = "dog_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
-    private Profile profile;
+    private Dog dog;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
@@ -27,8 +27,8 @@ public class Journal {
 
     public Journal() {}
 
-    public Journal(Profile profile) {
-        this.profile = profile;
+    public Journal(Dog dog) {
+        this.dog = dog;
     }
 
     public Long getId() {
@@ -47,12 +47,12 @@ public class Journal {
         this.entry = entry;
     }
 
-    public Profile getProfile() {
-        return profile;
+
+    public Dog getDog() {
+        return dog;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setDog(Dog dog) {
+        this.dog = dog;
     }
-
 }
