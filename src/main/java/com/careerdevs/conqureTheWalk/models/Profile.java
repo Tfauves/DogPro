@@ -23,7 +23,7 @@ public class Profile {
 //    private Journal journal;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Dog> dogs;
+    private Set<Dog> myDogs;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -69,11 +69,12 @@ public class Profile {
         this.user = user;
     }
 
-    public Set<Dog> getDogs() {
-        return dogs;
+
+    public Set<Dog> getMyDogs() {
+        return myDogs;
     }
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
+    public void setMyDogs(Set<Dog> myDogs) {
+        this.myDogs = myDogs;
     }
 }

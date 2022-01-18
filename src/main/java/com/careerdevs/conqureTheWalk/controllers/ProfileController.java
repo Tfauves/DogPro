@@ -99,7 +99,7 @@ public class ProfileController {
     public Profile addDog(@RequestBody Profile pro) {
         Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Dog dog = dog_repository.findById(pro.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (pro.getDogs() != null) dog.setOwner(profile);
+        if (pro.getMyDogs() != null) dog.setOwner(profile);
 
         return repository.save(profile);
 
@@ -119,7 +119,7 @@ public class ProfileController {
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
 //        if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
-        if (updateData.getDogs() != null) profile.setDogs(updateData.getDogs());
+        if (updateData.getMyDogs() != null) profile.setMyDogs(updateData.getMyDogs());
 
         return repository.save(profile);
 
