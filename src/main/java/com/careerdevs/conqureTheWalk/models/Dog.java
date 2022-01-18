@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +17,7 @@ public class Dog {
     private String sex;
 
     @OneToMany
-    private Set<Breed> breeds;
+    private Set<Breed> breed;
 
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -26,7 +25,7 @@ public class Dog {
     private Profile owner;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "dog")
-//    @JoinColumn(name = "journal_id")
+    @JoinColumn(name = "journal_id")
     @JsonIgnoreProperties("dog")
     private Journal journal;
 
@@ -81,12 +80,12 @@ public class Dog {
         this.sex = sex;
     }
 
-    public Set<Breed> getBreeds() {
-        return breeds;
+    public Set<Breed> getBreed() {
+        return breed;
     }
 
-    public void setBreeds(Set<Breed> breeds) {
-        this.breeds = breeds;
+    public void setBreed(Set<Breed> breed) {
+        this.breed = breed;
     }
 
     public Profile getOwner() {

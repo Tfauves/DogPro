@@ -7,6 +7,7 @@ import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
+import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,9 @@ public class DogController {
     private JournalRepository journalRepository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     UserService userService;
 
     @GetMapping
@@ -44,11 +48,18 @@ public class DogController {
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Dog> createDogWithJournal(@RequestBody Dog newDog) {
+    @PostMapping("/new/{proId}")
+    public ResponseEntity<Dog> createDogWithJournal(@PathVariable Long proId, @RequestBody Dog newDog) {
+        User currentUser = userService.getCurrentUser();
 
+        if (currentUser == null) {
+            return null;
+        }
+        Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Journal newJournal = journalRepository.save(newDog.getJournal());
         newJournal.setDog(newDog);
+        newDog.setOwner(profile);
+
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 
