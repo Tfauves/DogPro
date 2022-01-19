@@ -126,7 +126,7 @@ public class ProfileController {
     }
 
     //delete profile
-    //@PreAuthorize("hasRole('ADMIN')")
+
     @DeleteMapping
     public ResponseEntity<String> destroyProfile() {
         User currentUser = userService.getCurrentUser();
@@ -135,6 +135,13 @@ public class ProfileController {
             return null;
         }
         repository.deleteByUser_id(currentUser.getId());
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> destroyDevById(@PathVariable Long id) {
+        repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
