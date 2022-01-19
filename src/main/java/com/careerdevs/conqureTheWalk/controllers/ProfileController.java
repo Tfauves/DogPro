@@ -39,7 +39,7 @@ public class ProfileController {
 //get all profiles
 
     @GetMapping
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     List<Profile> getAll() {
         return repository.findAll();
@@ -106,8 +106,8 @@ public class ProfileController {
     }
 
     //update a profile
-    @PutMapping("{id}")
-    public @ResponseBody Profile updateById(@PathVariable Long id, @RequestBody Profile updateData) {
+    @PutMapping
+    public @ResponseBody Profile updateById(@RequestBody Profile updateData) {
 
         User currentUser = userService.getCurrentUser();
 
