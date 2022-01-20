@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @CrossOrigin
@@ -29,7 +30,7 @@ public class ProfileController {
 //    private JournalRepository journal_repository;
 
     @Autowired
-    private DogRepository dog_repository;
+    private DogRepository dogRepository;
 
 
     //get all profiles
@@ -98,7 +99,7 @@ public class ProfileController {
     @PutMapping("/dog")
     public Profile addDog(@RequestBody Profile pro) {
         Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Dog dog = dog_repository.findById(pro.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Dog dog = dogRepository.findById(pro.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (pro.getMyDogs() != null) dog.setOwner(profile);
 
         return repository.save(profile);
@@ -137,6 +138,7 @@ public class ProfileController {
         repository.deleteByUser_id(currentUser.getId());
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
