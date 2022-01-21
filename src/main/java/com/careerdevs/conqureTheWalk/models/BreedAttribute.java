@@ -12,10 +12,10 @@ public class BreedAttribute {
     private String attributeName;
     private String attributeValue;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "breed_id", referencedColumnName = "id")
-//    @JsonIncludeProperties("id")
-    private Breed breed;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "breed_id", referencedColumnName = "id")
+////    @JsonIncludeProperties("id")
+//    private Breed breed;
 
 
     public BreedAttribute() {}
@@ -49,11 +49,11 @@ public class BreedAttribute {
         this.attributeValue = attributeValue;
     }
 
-    public Breed getBreed() {
-        return breed;
-    }
-
-    public void setBreed(Breed breed) {
-        this.breed = breed;
-    }
+//    public Breed getBreed() {
+//        return breed;
+//    }
+//
+//    public void setBreed(Breed breed) {
+//        this.breed = breed;
+//    }
 }

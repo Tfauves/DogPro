@@ -1,7 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -10,17 +9,17 @@ public class Breed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String breedType;
+    private String breedName;
     private String breedGroup;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "breed")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BreedAttribute> breedAttributes;
 
 
     public Breed() {}
 
-    public Breed(String breedType, String breedGroup) {
-        this.breedType = breedType;
+    public Breed(String breedName, String breedGroup) {
+        this.breedName = breedName;
         this.breedGroup = breedGroup;
     }
 
@@ -32,12 +31,12 @@ public class Breed {
         this.id = id;
     }
 
-    public String getBreedType() {
-        return breedType;
+    public String getBreedName() {
+        return breedName;
     }
 
-    public void setBreedType(String breedType) {
-        this.breedType = breedType;
+    public void setBreedName(String breedName) {
+        this.breedName = breedName;
     }
 
     public String getBreedGroup() {

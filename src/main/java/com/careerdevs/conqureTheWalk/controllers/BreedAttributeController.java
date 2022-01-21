@@ -35,7 +35,7 @@ public class BreedAttributeController {
 
         if (updateData.getAttributeName() != null) attribute.setAttributeName(updateData.getAttributeName());
         if (updateData.getAttributeValue() != null) attribute.setAttributeValue(updateData.getAttributeValue());
-        if (updateData.getBreed() != null) attribute.setBreed(updateData.getBreed());
+//        if (updateData.getBreed() != null) attribute.setBreed(updateData.getBreed());
 
         return repository.save(attribute);
     }
