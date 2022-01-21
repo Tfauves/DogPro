@@ -1,6 +1,5 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
-
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;

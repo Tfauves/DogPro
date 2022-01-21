@@ -2,17 +2,14 @@ package com.careerdevs.conqureTheWalk.controllers;
 
 import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.Journal;
-import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
-import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @CrossOrigin

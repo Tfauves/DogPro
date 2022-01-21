@@ -25,20 +25,14 @@ public class ProfileController {
 
     @Autowired
     private ProfileRepository repository;
-//
-//    @Autowired
-//    private JournalRepository journal_repository;
 
     @Autowired
     private DogRepository dogRepository;
 
-
-    //get all profiles
     @Autowired
     UserService userService;
 
 //get all profiles
-
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody

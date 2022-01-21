@@ -2,14 +2,9 @@ package com.careerdevs.conqureTheWalk.models;
 
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
-// TODO: 1/9/2022 no display of the dog data also need to test the entry as no data is showing currently. 
 @Entity
 public class Profile {
     @Id

@@ -2,9 +2,7 @@ package com.careerdevs.conqureTheWalk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,15 +13,14 @@ public class Journal {
 
     @OneToOne
     @JoinColumn(name = "dog_id", referencedColumnName = "id")
-   @JsonIncludeProperties("id")
+    @JsonIncludeProperties("id")
     private Dog dog;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIgnoreProperties("id")
-//    , mappedBy = "journal"
-    private Set<Entry> entry;
 
+    private Set<Entry> entry;
 
     public Journal() {}
 
