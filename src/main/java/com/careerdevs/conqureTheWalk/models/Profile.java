@@ -14,11 +14,6 @@ public class Profile {
     private Long id;
     private String name;
 
-//    @OneToOne(fetch = FetchType.EAGER, mappedBy = "profile")
-////    @JoinColumn(name = "journal_id")
-//    @JsonIgnoreProperties("profile")
-//    private Journal journal;
-
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("owner")
     private Set<Dog> myDogs;
@@ -51,14 +46,6 @@ public class Profile {
         this.name = name;
     }
 
-//    public Journal getJournal() {
-//        return journal;
-//    }
-//
-//    public void setJournal(Journal journal) {
-//        this.journal = journal;
-//    }
-
     public User getUser() {
         return user;
     }
@@ -66,7 +53,6 @@ public class Profile {
     public void setUser(User user) {
         this.user = user;
     }
-
 
     public Set<Dog> getMyDogs() {
         return myDogs;

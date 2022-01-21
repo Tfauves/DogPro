@@ -32,14 +32,13 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-//get all profiles
+    //get all profiles
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     List<Profile> getAll() {
         return repository.findAll();
     }
-
 
     //get self
     @GetMapping("/self")
@@ -54,7 +53,6 @@ public class ProfileController {
     }
 
 //create a new profile
-
     @PostMapping
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
         User currentUser = userService.getCurrentUser();
@@ -66,29 +64,6 @@ public class ProfileController {
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
-//    //create a new profile with a journal
-//    @PostMapping("/new")
-//    public ResponseEntity<Profile> createProf(@RequestBody Profile newProfile) {
-//        User currentUser = userService.getCurrentUser();
-//
-//        if (currentUser == null) {
-//            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-//        }
-//        newProfile.setUser(currentUser);
-//        Journal newJournal = journal_repository.save(newProfile.getJournal());
-//        newJournal.setProfile(newProfile);
-//        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
-//    }
-
-    //add a journal to an existing profile
-//    @PutMapping("/add/journal")
-//    public Profile addJournal(@RequestBody Profile pro) {
-//        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//        Journal journal = journal_repository.save(pro.getJournal());
-//        profile.setJournal(journal);
-//        return repository.save(profile);
-//    }
-
     //add dog to profile
     @PutMapping("/dog")
     public Profile addDog(@RequestBody Profile pro) {
@@ -97,7 +72,6 @@ public class ProfileController {
         if (pro.getMyDogs() != null) dog.setOwner(profile);
 
         return repository.save(profile);
-
     }
 
     //update a profile
@@ -105,7 +79,6 @@ public class ProfileController {
     public @ResponseBody Profile updateById(@RequestBody Profile updateData) {
 
         User currentUser = userService.getCurrentUser();
-
         if (currentUser == null) {
             return null;
         }
@@ -113,7 +86,6 @@ public class ProfileController {
         Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
-//        if (updateData.getJournal() != null) profile.setJournal(updateData.getJournal());
         if (updateData.getMyDogs() != null) profile.setMyDogs(updateData.getMyDogs());
 
         return repository.save(profile);
@@ -121,7 +93,6 @@ public class ProfileController {
     }
 
     //delete profile
-
     @DeleteMapping
     public ResponseEntity<String> destroyProfile() {
         User currentUser = userService.getCurrentUser();
