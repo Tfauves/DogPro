@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -40,6 +41,17 @@ public class DogController {
     @GetMapping("/{id}")
     public @ResponseBody Dog getById(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/mydog")
+    public @ResponseBody Set<Dog> getOwnDogs() {
+        User currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            return null;
+        }
+        Profile profile = profileRepository.getById(currentUser.getId());
+        return profile.getMyDogs();
+
     }
 
     @PostMapping
