@@ -1,5 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Breed {
     private String breedGroup;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("id")
     private Set<BreedAttribute> breedAttributes;
 
 
