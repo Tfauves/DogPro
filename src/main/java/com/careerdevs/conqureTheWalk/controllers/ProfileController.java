@@ -40,6 +40,17 @@ public class ProfileController {
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody Profile getById() {
+        User currentUser = userService.getCurrentUser();
+
+        if(currentUser == null) {
+            return null;
+        }
+        return repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    }
+
     //get self
     @GetMapping("/self")
     public @ResponseBody Profile getSelf() {

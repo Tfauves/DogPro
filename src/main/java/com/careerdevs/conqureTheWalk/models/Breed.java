@@ -14,9 +14,9 @@ public class Breed {
     private String breedName;
     private String breedGroup;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("id")
-    private Set<BreedAttribute> breedAttributes;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties("id")
+//    private Set<BreedAttribute> breedAttributes;
 
 
     public Breed() {}
@@ -50,11 +50,11 @@ public class Breed {
         this.breedGroup = breedGroup;
     }
 
-    public Set<BreedAttribute> getBreedAttributes() {
-        return breedAttributes;
-    }
-
-    public void setBreedAttributes(Set<BreedAttribute> breedAttributes) {
-        this.breedAttributes = breedAttributes;
-    }
+//    public Set<BreedAttribute> getBreedAttributes() {
+//        return breedAttributes;
+//    }
+//
+//    public void setBreedAttributes(Set<BreedAttribute> breedAttributes) {
+//        this.breedAttributes = breedAttributes;
+//    }
 }
