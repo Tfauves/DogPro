@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Set;
 
+// TODO: 1/25/2022 need to bring in profile avatar for user and for dogs 
 @Entity
 public class Profile {
     @Id
