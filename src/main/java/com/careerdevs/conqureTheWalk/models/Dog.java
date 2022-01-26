@@ -20,6 +20,9 @@ public class Dog {
     @OneToMany
     private Set<Breed> breed;
 
+    @OneToOne
+    private Avatar avatar;
+
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
@@ -103,5 +106,13 @@ public class Dog {
 
     public void setJournal(Journal journal) {
         this.journal = journal;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }

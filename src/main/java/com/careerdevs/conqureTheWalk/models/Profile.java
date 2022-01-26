@@ -24,6 +24,9 @@ public class Profile {
     @JsonIgnore
     private User user;
 
+    @OneToOne
+    private Avatar avatar;
+
     public Profile() {}
 
     public Profile(User user, String name) {
@@ -61,5 +64,13 @@ public class Profile {
 
     public void setMyDogs(Set<Dog> myDogs) {
         this.myDogs = myDogs;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }
