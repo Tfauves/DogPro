@@ -1,9 +1,11 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
+import com.careerdevs.conqureTheWalk.models.Avatar;
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
+import com.careerdevs.conqureTheWalk.repositories.AvatarRepository;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
@@ -28,6 +30,9 @@ public class ProfileController {
 
     @Autowired
     private DogRepository dogRepository;
+
+    @Autowired
+    AvatarRepository avatarRepository;
 
     @Autowired
     UserService userService;
@@ -99,6 +104,29 @@ public class ProfileController {
         if (updateData.getName() != null) profile.setName(updateData.getName());
         if (updateData.getMyDogs() != null) profile.setMyDogs(updateData.getMyDogs());
 
+        return repository.save(profile);
+
+    }
+
+    @PostMapping("/photo")
+    public Profile addPhoto(@RequestBody Profile pro) {
+
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return null;
+        }
+
+        Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (profile.getAvatar() != null) {
+            Avatar avatar = profile.getAvatar();
+            avatar.setUrl(pro.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return profile;
+        }
+        Avatar avatar = avatarRepository.save(pro.getAvatar());
+        profile.setAvatar(avatar);
         return repository.save(profile);
 
     }
