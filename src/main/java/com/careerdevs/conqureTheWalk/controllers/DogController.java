@@ -1,9 +1,11 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
+import com.careerdevs.conqureTheWalk.models.Avatar;
 import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
+import com.careerdevs.conqureTheWalk.repositories.AvatarRepository;
 import com.careerdevs.conqureTheWalk.repositories.DogRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
@@ -29,6 +31,9 @@ public class DogController {
 
     @Autowired
     private ProfileRepository profileRepository;
+
+    @Autowired
+    AvatarRepository avatarRepository;
 
     @Autowired
     UserService userService;
@@ -72,6 +77,23 @@ public class DogController {
         newDog.setOwner(profile);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/photo/{dId}")
+    public Dog addPhoto(@PathVariable Long dId, @RequestBody Dog avadog) {
+
+        Dog dog = repository.findById(dId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (dog.getAvatar() != null) {
+            Avatar avatar = dog.getAvatar();
+            avatar.setUrl(avadog.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return dog;
+        }
+        Avatar avatar = avatarRepository.save(avadog.getAvatar());
+        dog.setAvatar(avatar);
+        return repository.save(dog);
+
     }
 
     @PutMapping("/{id}")
