@@ -103,6 +103,7 @@ public class ProfileController {
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
         if (updateData.getMyDogs() != null) profile.setMyDogs(updateData.getMyDogs());
+        
 
         return repository.save(profile);
 

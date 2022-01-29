@@ -29,9 +29,10 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(User user, String name) {
+    public Profile(User user, String name, Avatar avatar) {
         this.user = user;
         this.name = name;
+        this.avatar = avatar;
     }
 
     public Long getId() {
