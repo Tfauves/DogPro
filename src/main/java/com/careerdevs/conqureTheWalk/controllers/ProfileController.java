@@ -82,10 +82,18 @@ public class ProfileController {
 
     //add dog to profile
     @PutMapping("/dog")
-    public Profile addDog(@RequestBody Profile pro) {
-        Profile profile = repository.findById(pro.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Dog dog = dogRepository.findById(pro.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (pro.getMyDogs() != null) dog.setOwner(profile);
+    public Profile addDog(@RequestBody List<Dog> addDog) {
+
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            return null;
+        }
+        Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        for (Dog dog : addDog) {
+            dogRepository.save(dog);
+        }
+        profile.getMyDogs().addAll(addDog);
 
         return repository.save(profile);
     }

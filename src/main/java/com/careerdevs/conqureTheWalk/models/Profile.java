@@ -3,6 +3,7 @@ package com.careerdevs.conqureTheWalk.models;
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,7 +17,8 @@ public class Profile {
     private String name;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("owner")
+//    @JsonIgnoreProperties("owner")
+    @JsonIncludeProperties({"name", "id", "avatar"})
     private Set<Dog> myDogs;
 
     @OneToOne
