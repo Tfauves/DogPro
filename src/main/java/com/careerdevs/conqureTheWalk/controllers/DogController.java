@@ -105,6 +105,8 @@ public class DogController {
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
         if (updates.getSex() != null) updatedDog.setSex(updatedDog.getSex());
         if (updates.getOwner() != null) updatedDog.setOwner(updatedDog.getOwner());
+        if (updates.getBreed() != null) updatedDog.setBreed(updatedDog.getBreed());
+        if (updates.getAvatar() != null) updatedDog.setAvatar(updatedDog.getAvatar());
         return repository.save(updatedDog);
 
     }

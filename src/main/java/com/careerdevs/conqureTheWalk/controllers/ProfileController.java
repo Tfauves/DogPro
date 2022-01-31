@@ -91,6 +91,7 @@ public class ProfileController {
         }
         Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         for (Dog dog : addDog) {
+            dog.setOwner(profile);
             dogRepository.save(dog);
         }
         profile.getMyDogs().addAll(addDog);

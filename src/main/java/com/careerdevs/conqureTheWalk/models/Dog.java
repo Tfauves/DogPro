@@ -24,7 +24,7 @@ public class Dog {
     private Avatar avatar;
 
     @ManyToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
     private Profile owner;
 
