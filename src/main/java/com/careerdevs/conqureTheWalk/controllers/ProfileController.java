@@ -77,6 +77,16 @@ public class ProfileController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         newProfile.setUser(currentUser);
+
+        if (newProfile.getAvatar() != null) {
+            Avatar avatar = newProfile.getAvatar();
+            avatar.setUrl(newProfile.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+        }
+        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
+        newProfile.setAvatar(avatar);
+
+
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
