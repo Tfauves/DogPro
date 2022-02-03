@@ -1,14 +1,8 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
-import com.careerdevs.conqureTheWalk.models.Avatar;
-import com.careerdevs.conqureTheWalk.models.Dog;
-import com.careerdevs.conqureTheWalk.models.Journal;
-import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.models.*;
 import com.careerdevs.conqureTheWalk.models.auth.User;
-import com.careerdevs.conqureTheWalk.repositories.AvatarRepository;
-import com.careerdevs.conqureTheWalk.repositories.DogRepository;
-import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
-import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
+import com.careerdevs.conqureTheWalk.repositories.*;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +24,9 @@ public class ProfileController {
 
     @Autowired
     private DogRepository dogRepository;
+
+    @Autowired
+    BreedRepository breedRepository;
 
     @Autowired
     AvatarRepository avatarRepository;
@@ -85,6 +82,16 @@ public class ProfileController {
         }
         Avatar avatar = avatarRepository.save(newProfile.getAvatar());
         newProfile.setAvatar(avatar);
+
+//        if ( newProfile.getMyDogs() != null ) {
+//            for (Dog dogs : newProfile.getMyDogs()) {
+//                dogs.setOwner(newProfile);
+//                dogs.setBreed(dogs.getBreed());
+//                dogRepository.save(dogs);
+//                breedRepository.saveAll(dogs.getBreed());
+//            }
+//
+//        }
 
 
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
