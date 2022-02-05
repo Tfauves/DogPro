@@ -171,7 +171,7 @@ public class ProfileController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @DeleteMapping("{id}")
     public ResponseEntity<String> destroyDevById(@PathVariable Long id) {
         repository.deleteById(id);
