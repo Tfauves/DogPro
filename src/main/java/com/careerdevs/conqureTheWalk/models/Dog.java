@@ -36,14 +36,14 @@ public class Dog {
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal, Avatar avatar) {
+    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
         this.owner = owner;
         this.journal = journal;
-        this.avatar = avatar;
+
     }
 
     public Long getId() {
