@@ -73,6 +73,7 @@ public class DogController {
         }
         Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Journal newJournal = journalRepository.save(newDog.getJournal());
+
         newJournal.setDog(newDog);
         newDog.setOwner(profile);
 
