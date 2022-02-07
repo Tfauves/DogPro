@@ -21,6 +21,7 @@ public class Dog {
     private Set<Breed> breed;
 
     @OneToOne
+    @JsonIgnoreProperties("id")
     private Avatar avatar;
 
     @ManyToOne
