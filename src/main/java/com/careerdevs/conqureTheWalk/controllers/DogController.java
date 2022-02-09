@@ -5,10 +5,7 @@ import com.careerdevs.conqureTheWalk.models.Dog;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
-import com.careerdevs.conqureTheWalk.repositories.AvatarRepository;
-import com.careerdevs.conqureTheWalk.repositories.DogRepository;
-import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
-import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
+import com.careerdevs.conqureTheWalk.repositories.*;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +31,9 @@ public class DogController {
 
     @Autowired
     AvatarRepository avatarRepository;
+
+    @Autowired
+    BreedRepository breedRepository;
 
     @Autowired
     UserService userService;
@@ -72,9 +72,9 @@ public class DogController {
             return null;
         }
         Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Journal newJournal = journalRepository.save(newDog.getJournal());
-
-        newJournal.setDog(newDog);
+//        Journal newJournal = journalRepository.save(newDog.getJournal());
+//
+//        newJournal.setDog(newDog);
         newDog.setOwner(profile);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
@@ -108,6 +108,8 @@ public class DogController {
         if (updates.getOwner() != null) updatedDog.setOwner(updatedDog.getOwner());
         if (updates.getBreed() != null) updatedDog.setBreed(updatedDog.getBreed());
         if (updates.getAvatar() != null) updatedDog.setAvatar(updatedDog.getAvatar());
+
+        breedRepository.saveAll(updatedDog.getBreed());
         return repository.save(updatedDog);
 
     }
