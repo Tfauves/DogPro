@@ -72,9 +72,9 @@ public class DogController {
             return null;
         }
         Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//        Journal newJournal = journalRepository.save(newDog.getJournal());
-//
-//        newJournal.setDog(newDog);
+        Journal newJournal = journalRepository.save(newDog.getJournal());
+
+        newJournal.setDog(newDog);
         newDog.setOwner(profile);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
@@ -104,12 +104,8 @@ public class DogController {
         if (updates.getName() != null) updatedDog.setName(updates.getName());
         if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
-        if (updates.getSex() != null) updatedDog.setSex(updatedDog.getSex());
-        if (updates.getOwner() != null) updatedDog.setOwner(updatedDog.getOwner());
-        if (updates.getBreed() != null) updatedDog.setBreed(updatedDog.getBreed());
-        if (updates.getAvatar() != null) updatedDog.setAvatar(updatedDog.getAvatar());
+        if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
 
-        breedRepository.saveAll(updatedDog.getBreed());
         return repository.save(updatedDog);
 
     }
