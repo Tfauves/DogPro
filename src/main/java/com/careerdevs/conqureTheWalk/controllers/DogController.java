@@ -72,9 +72,9 @@ public class DogController {
             return null;
         }
         Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//        Journal newJournal = journalRepository.save(newDog.getJournal());
-//
-//        newJournal.setDog(newDog);
+        Journal newJournal = journalRepository.save(newDog.getJournal());
+
+        newJournal.setDog(newDog);
         newDog.setOwner(profile);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
@@ -100,19 +100,12 @@ public class DogController {
     @PutMapping("/{id}")
     public @ResponseBody Dog updateDog(@PathVariable Long id, @RequestBody Dog updates) {
         Dog updatedDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Journal newJournal = journalRepository.getById(updates.getJournal().getId());
 
         if (updates.getName() != null) updatedDog.setName(updates.getName());
         if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
         if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
-        if (updates.getOwner() != null) updatedDog.setOwner(updates.getOwner());
-        if (updates.getBreed() != null) updatedDog.setBreed(updates.getBreed());
-        if (updates.getAvatar() != null) updatedDog.setAvatar(updates.getAvatar());
-        if (updates.getJournal() != null) updatedDog.setJournal(newJournal);
 
-        breedRepository.saveAll(updatedDog.getBreed());
-        journalRepository.save(updatedDog.getJournal());
         return repository.save(updatedDog);
 
     }
