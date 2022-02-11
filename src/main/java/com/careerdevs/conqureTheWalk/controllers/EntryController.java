@@ -34,7 +34,7 @@ public class EntryController {
 
         if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
         if (updateData.getDuration() != null) entry.setDuration(updateData.getDuration());
-        if (updateData.getGoal() != null) entry.setGoal(updateData.getGoal());
+//        if (updateData.getGoal() != null) entry.setGoal(updateData.getGoal());
 
         return repository.save(entry);
     }
