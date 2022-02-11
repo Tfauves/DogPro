@@ -17,8 +17,10 @@ public class Dog {
     private Integer weight;
     private String sex;
 
-    @OneToMany
-    private Set<Breed> breed;
+//    @OneToMany
+//    private Set<Breed> breed;
+    @OneToOne
+    private Breed breed;
 
     @OneToOne
     @JsonIgnoreProperties("id")
@@ -86,13 +88,13 @@ public class Dog {
         this.sex = sex;
     }
 
-    public Set<Breed> getBreed() {
-        return breed;
-    }
-
-    public void setBreed(Set<Breed> breed) {
-        this.breed = breed;
-    }
+//    public Set<Breed> getBreed() {
+//        return breed;
+//    }
+//
+//    public void setBreed(Set<Breed> breed) {
+//        this.breed = breed;
+//    }
 
     public Profile getOwner() {
         return owner;
@@ -116,5 +118,13 @@ public class Dog {
 
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public Breed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed = breed;
     }
 }

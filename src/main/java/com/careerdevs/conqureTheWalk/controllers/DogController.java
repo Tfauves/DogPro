@@ -1,9 +1,6 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
-import com.careerdevs.conqureTheWalk.models.Avatar;
-import com.careerdevs.conqureTheWalk.models.Dog;
-import com.careerdevs.conqureTheWalk.models.Journal;
-import com.careerdevs.conqureTheWalk.models.Profile;
+import com.careerdevs.conqureTheWalk.models.*;
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.*;
 import com.careerdevs.conqureTheWalk.services.UserService;
@@ -97,6 +94,13 @@ public class DogController {
 
     }
 
+//    @PutMapping("/breed/{dId}")
+//    public @ResponseBody Dog addBreedToDog(@PathVariable Long dId, @RequestBody Breed dogBreed) {
+//        Dog updateDog = repository.findById(dId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//
+//
+//    }
+
     @PutMapping("/{id}")
     public @ResponseBody Dog updateDog(@PathVariable Long id, @RequestBody Dog updates) {
         Dog updatedDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -105,6 +109,9 @@ public class DogController {
         if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
         if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
+        if (updates.getBreed() != null) updatedDog.setBreed(updates.getBreed());
+
+
 
         return repository.save(updatedDog);
 
