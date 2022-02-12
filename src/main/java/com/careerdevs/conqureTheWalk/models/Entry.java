@@ -25,7 +25,8 @@ public class Entry {
     @JsonIncludeProperties("id")
     private Journal journal;
 
-
+    // TODO: 2/11/2022 create an entry using the activities already made.
+    //  entry then needs to be added to the journal, thinking this should be done while entry id being created.
     public Entry() {}
 
     public Entry(Timestamp timestamp,Activity activity, String duration, Journal journal) {
