@@ -74,14 +74,16 @@ public class ProfileController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         newProfile.setUser(currentUser);
+// TODO: 2/13/2022 avatar breaks front end
 
-        if (newProfile.getAvatar() != null) {
-            Avatar avatar = newProfile.getAvatar();
-            avatar.setUrl(newProfile.getAvatar().getUrl());
-            avatarRepository.save(avatar);
-        }
-        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
-        newProfile.setAvatar(avatar);
+//        if (newProfile.getAvatar() != null) {
+//            Avatar avatar = newProfile.getAvatar();
+//            avatar.setUrl(newProfile.getAvatar().getUrl());
+//            avatarRepository.save(avatar);
+//        }
+//        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
+//        newProfile.setAvatar(avatar);
+// TODO: 2/13/2022  gettiing dogs for frontend profile display
 
 //        if ( newProfile.getMyDogs() != null ) {
 //            for (Dog dogs : newProfile.getMyDogs()) {
