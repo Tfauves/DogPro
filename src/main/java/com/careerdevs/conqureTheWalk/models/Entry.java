@@ -29,11 +29,10 @@ public class Entry {
     //  entry then needs to be added to the journal, thinking this should be done while entry id being created.
     public Entry() {}
 
-    public Entry(Timestamp timestamp,Activity activity, String duration, Journal journal) {
+    public Entry(Timestamp timestamp,Activity activity, String duration) {
         this.timestamp = timestamp;
         this.activity = activity;
         this.duration = duration;
-        this.journal = journal;
     }
 
     public Long getId() {
