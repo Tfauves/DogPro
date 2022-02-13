@@ -1,7 +1,9 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
+import com.careerdevs.conqureTheWalk.models.Activity;
 import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.Journal;
+import com.careerdevs.conqureTheWalk.repositories.ActivityRepository;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,12 @@ public class JournalController {
     private JournalRepository repository;
 
     @Autowired
-    EntryRepository entry_repository;
+    private EntryRepository entry_repository;
+
+    @Autowired
+    private ActivityRepository activityRepository;
+
+    @Autowired
 
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
