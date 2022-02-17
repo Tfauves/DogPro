@@ -3,9 +3,11 @@ package com.careerdevs.conqureTheWalk.controllers;
 
 import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.Journal;
+import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
+import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
