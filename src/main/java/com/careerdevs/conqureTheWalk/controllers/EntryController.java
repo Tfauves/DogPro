@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -39,7 +40,9 @@ public class EntryController {
     public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
 
         Journal dogJournal = journalRepository.findById(newEntry.getJournal().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         dogJournal.setEntry(newEntry.getJournal().getEntry());
+        newEntry.setActivity(newEntry.getActivity());
         journalRepository.save(dogJournal);
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
