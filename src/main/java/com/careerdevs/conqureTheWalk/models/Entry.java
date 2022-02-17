@@ -15,7 +15,7 @@ public class Entry {
 //    private String goal;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "activity_id", referencedColumnName = "id")
     @JsonIgnoreProperties("id")
     private Activity activity;

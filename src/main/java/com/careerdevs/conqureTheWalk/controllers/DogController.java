@@ -27,13 +27,13 @@ public class DogController {
     private ProfileRepository profileRepository;
 
     @Autowired
-    AvatarRepository avatarRepository;
+    private AvatarRepository avatarRepository;
 
     @Autowired
-    BreedRepository breedRepository;
+    private BreedRepository breedRepository;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping
     public @ResponseBody List<Dog> getAllDogs() {
