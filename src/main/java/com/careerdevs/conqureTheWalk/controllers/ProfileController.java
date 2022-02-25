@@ -173,5 +173,10 @@ public class ProfileController {
     }
 
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> destroyDevById(@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
 
 }
