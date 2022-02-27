@@ -74,7 +74,7 @@ public class ProfileController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         newProfile.setUser(currentUser);
-// TODO: 2/13/2022 avatar breaks front end
+// TODO: 2/25/2022 avatar breaks frontend
 
 //        if (newProfile.getAvatar() != null) {
 //            Avatar avatar = newProfile.getAvatar();
@@ -83,8 +83,8 @@ public class ProfileController {
 //        }
 //        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
 //        newProfile.setAvatar(avatar);
-// TODO: 2/13/2022  gettiing dogs for frontend profile display
-
+// TODO: 2/25/2022 get dogs
+//
 //        if ( newProfile.getMyDogs() != null ) {
 //            for (Dog dogs : newProfile.getMyDogs()) {
 //                dogs.setOwner(newProfile);
