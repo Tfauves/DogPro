@@ -1,5 +1,6 @@
 package com.careerdevs.conqureTheWalk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
@@ -22,7 +23,8 @@ public class Entry {
 
     @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
-    @JsonIncludeProperties("id")
+//    @JsonIncludeProperties("id")
+    @JsonIgnore
     private Journal journal;
 
     // TODO: 2/11/2022 create an entry using the activities already made.

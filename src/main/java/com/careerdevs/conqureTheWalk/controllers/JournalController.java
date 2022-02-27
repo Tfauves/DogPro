@@ -57,6 +57,8 @@ public class JournalController {
 
         if (journalEntry.getEntry() != null) journal.setEntry(journalEntry.getEntry());
 
+
+
         return repository.save(journal);
     }
 
