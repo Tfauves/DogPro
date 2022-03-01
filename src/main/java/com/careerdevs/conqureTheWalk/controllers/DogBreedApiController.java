@@ -16,10 +16,10 @@ public class DogBreedApiController {
 
     @Value("${ConquerTheWalk.app.dogBreedApiKey}")
     private String apiKey;
-
+//    https://api.thedogapi.com/v1/breeds/search?q=gold&api_key=7fada790-629b-4568-b94b-26d57a03e22f
 //    @GetMapping("/breed/{q}")
-//    public ResponseEntity<?> getDogBreedInfo(@PathVariable String q) {
-//    String uri = "https://api.thedogapi.com/v1/breeds/search" + "?q=" + q;
+//   public ResponseEntity<?> getDogBreedInfo(@PathVariable String q) {
+//   String uri = "https://api.thedogapi.com/v1/breeds/search" + "?q=" + q + "&api_key=" + apiKey;
 //        return ResponseEntity.ok();
 //    }
 }
