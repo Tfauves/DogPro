@@ -57,7 +57,7 @@ public class BreedInfo {
         }
     }
 
-    private Weight weight;
+//    private Weight weight;
     private Height height;
     private int id;
     private String name;
@@ -69,8 +69,8 @@ public class BreedInfo {
 
     public BreedInfo() {}
 
-    public BreedInfo(Weight weight, Height height, int id, String name, String bred_for, String breed_group, String life_span, String temperament, String reference_image_id) {
-        this.weight = weight;
+    public BreedInfo( Height height, int id, String name, String bred_for, String breed_group, String life_span, String temperament, String reference_image_id) {
+//        this.weight = weight;
         this.height = height;
         this.id = id;
         this.name = name;
@@ -81,13 +81,13 @@ public class BreedInfo {
         this.reference_image_id = reference_image_id;
     }
 
-    public Weight getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Weight weight) {
-        this.weight = weight;
-    }
+//    public Weight getWeight() {
+//        return weight;
+//    }
+//
+//    public void setWeight(Weight weight) {
+//        this.weight = weight;
+//    }
 
     public Height getHeight() {
         return height;

@@ -1,17 +1,24 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
 
+import com.careerdevs.conqureTheWalk.payload.response.api.response.BreedInfo;
 import com.careerdevs.conqureTheWalk.payload.response.api.response.BreedResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/info")
 public class DogBreedApiController {
+
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -26,7 +33,7 @@ public class DogBreedApiController {
    String uri = "https://api.thedogapi.com/v1/breeds/search" + "?q=" + q + "&api_key=" + apiKey;
 
 
-        BreedResponse response = restTemplate.getForObject(uri, BreedResponse.class);
-        return ResponseEntity.ok(response.getBreedInfoList());
+        List<BreedInfo> response = Arrays.asList(restTemplate.getForObject(uri, BreedInfo[].class));
+        return ResponseEntity.ok(response);
     }
 }
