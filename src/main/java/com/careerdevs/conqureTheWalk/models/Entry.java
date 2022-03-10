@@ -16,10 +16,10 @@ public class Entry {
 //    private String goal;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-    @ManyToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "activity_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("id")
-    private Activity activity;
+//    @ManyToOne( cascade = CascadeType.ALL)
+//    @JoinColumn(name = "activity_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties("id")
+//    private Activity activity;
 
     @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
@@ -27,13 +27,11 @@ public class Entry {
     @JsonIgnore
     private Journal journal;
 
-    // TODO: 2/11/2022 create an entry using the activities already made.
-    //  entry then needs to be added to the journal, thinking this should be done while entry id being created.
     public Entry() {}
 
-    public Entry(Timestamp timestamp,Activity activity, String duration) {
+    public Entry(Timestamp timestamp, String duration) {
         this.timestamp = timestamp;
-        this.activity = activity;
+//        this.activity = activity;
         this.duration = duration;
     }
 
@@ -53,13 +51,13 @@ public class Entry {
         this.timestamp = timestamp;
     }
 
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
+//    public Activity getActivity() {
+//        return activity;
+//    }
+//
+//    public void setActivity(Activity activity) {
+//        this.activity = activity;
+//    }
 
     public String getDuration() {
         return duration;

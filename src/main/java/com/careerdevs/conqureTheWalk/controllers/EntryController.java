@@ -1,10 +1,12 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
 
+import com.careerdevs.conqureTheWalk.models.Activity;
 import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.models.Profile;
 import com.careerdevs.conqureTheWalk.models.auth.User;
+import com.careerdevs.conqureTheWalk.repositories.ActivityRepository;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
@@ -26,7 +28,7 @@ public class EntryController {
     private EntryRepository repository;
 
     @Autowired
-    private JournalRepository journalRepository;
+    private ActivityRepository activityRepository;
 
     @Autowired
     private UserService userService;
@@ -39,11 +41,6 @@ public class EntryController {
     @PostMapping
     public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
 
-        Journal dogJournal = journalRepository.findById(newEntry.getJournal().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        dogJournal.setEntry(newEntry.getJournal().getEntry());
-        newEntry.setActivity(newEntry.getActivity());
-        journalRepository.save(dogJournal);
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
 
@@ -51,7 +48,7 @@ public class EntryController {
     public @ResponseBody Entry updateEntry(@PathVariable Long id, Entry updateData) {
         Entry entry = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
+//        if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
         if (updateData.getDuration() != null) entry.setDuration(updateData.getDuration());
 //        if (updateData.getGoal() != null) entry.setGoal(updateData.getGoal());
 
