@@ -13,13 +13,10 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String duration;
-//    private String goal;
+    private String activity;
+
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-//    @ManyToOne( cascade = CascadeType.ALL)
-//    @JoinColumn(name = "activity_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties("id")
-//    private Activity activity;
 
     @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
@@ -29,9 +26,9 @@ public class Entry {
 
     public Entry() {}
 
-    public Entry(Timestamp timestamp, String duration) {
+    public Entry(Timestamp timestamp, String duration, String activity) {
         this.timestamp = timestamp;
-//        this.activity = activity;
+        this.activity = activity;
         this.duration = duration;
     }
 
@@ -51,13 +48,6 @@ public class Entry {
         this.timestamp = timestamp;
     }
 
-//    public Activity getActivity() {
-//        return activity;
-//    }
-//
-//    public void setActivity(Activity activity) {
-//        this.activity = activity;
-//    }
 
     public String getDuration() {
         return duration;
@@ -73,5 +63,13 @@ public class Entry {
 
     public void setJournal(Journal journal) {
         this.journal = journal;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }
