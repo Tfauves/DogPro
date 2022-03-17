@@ -14,7 +14,6 @@ public class Entry {
     private Long id;
     private String type;
     private String activity;
-//    private String duration;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 
@@ -30,7 +29,6 @@ public class Entry {
         this.timestamp = timestamp;
         this.activity = activity;
         this.type = type;
-//        this.duration = duration;
     }
 
     public Long getId() {
@@ -48,16 +46,6 @@ public class Entry {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
-
-//
-//    public String getDuration() {
-//        return duration;
-//    }
-//
-//    public void setDuration(String duration) {
-//        this.duration = duration;
-//    }
-
 
     public String getType() {
         return type;
