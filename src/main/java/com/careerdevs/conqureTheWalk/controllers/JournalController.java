@@ -52,24 +52,21 @@ public class JournalController {
 
     //update journal
     @PutMapping("/entry/{journalId}")
-    public @ResponseBody Journal addEntry(@PathVariable Long journalId, @RequestBody Entry journalEntry) {
+    public @ResponseBody Entry addEntry(@PathVariable Long journalId, @RequestBody Entry journalEntry) {
         Journal journal = repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Entry newEntry = entry_repository.getById(journalEntry.getId());
 
+        journalEntry.setJournal(journal);
 
-        journalEntry.getDuration();
-        journalEntry.getTimestamp();
+        repository.save(journal);
 
-        entry_repository.save(newEntry);
-
-        return repository.save(journal);
+        return entry_repository.save(journalEntry);
     }
 
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
+//        if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
         if (updateData.getDog()!= null) journal.setDog(updateData.getDog());
 
         return repository.save(journal);

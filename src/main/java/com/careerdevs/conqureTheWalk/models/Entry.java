@@ -12,24 +12,25 @@ public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String duration;
+    private String type;
     private String activity;
-
+//    private String duration;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 
     @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
 //    @JsonIncludeProperties("id")
-    @JsonIgnore
+//    @JsonIgnore
     private Journal journal;
 
     public Entry() {}
 
-    public Entry(Timestamp timestamp, String duration, String activity) {
+    public Entry(Timestamp timestamp, String type, String activity) {
         this.timestamp = timestamp;
         this.activity = activity;
-        this.duration = duration;
+        this.type = type;
+//        this.duration = duration;
     }
 
     public Long getId() {
@@ -48,13 +49,22 @@ public class Entry {
         this.timestamp = timestamp;
     }
 
+//
+//    public String getDuration() {
+//        return duration;
+//    }
+//
+//    public void setDuration(String duration) {
+//        this.duration = duration;
+//    }
 
-    public String getDuration() {
-        return duration;
+
+    public String getType() {
+        return type;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Journal getJournal() {

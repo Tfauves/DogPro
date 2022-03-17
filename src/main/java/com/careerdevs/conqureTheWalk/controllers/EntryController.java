@@ -48,9 +48,8 @@ public class EntryController {
     public @ResponseBody Entry updateEntry(@PathVariable Long id, Entry updateData) {
         Entry entry = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-//        if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
-        if (updateData.getDuration() != null) entry.setDuration(updateData.getDuration());
-//        if (updateData.getGoal() != null) entry.setGoal(updateData.getGoal());
+        if (updateData.getType() != null) entry.setType(updateData.getType());
+        if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
 
         return repository.save(entry);
     }
