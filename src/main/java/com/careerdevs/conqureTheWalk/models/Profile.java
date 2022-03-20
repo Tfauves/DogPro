@@ -27,6 +27,7 @@ public class Profile {
     private User user;
 
     @OneToOne
+    @JsonIgnoreProperties("id")
     private Avatar avatar;
 
     public Profile() {}

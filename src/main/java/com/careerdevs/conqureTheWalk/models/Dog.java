@@ -17,9 +17,9 @@ public class Dog {
     private Integer weight;
     private String sex;
 
-//    @OneToMany
-//    private Set<Breed> breed;
+
     @OneToOne
+    @JsonIgnoreProperties("id")
     private Breed breed;
 
     @OneToOne

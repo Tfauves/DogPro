@@ -73,6 +73,7 @@ public class DogController {
 
         newJournal.setDog(newDog);
         newDog.setOwner(profile);
+        newDog.setJournal(newJournal);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
@@ -111,8 +112,10 @@ public class DogController {
         if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
         if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
         if (updates.getBreed() != null) updatedDog.setBreed(breed);
+        if(updates.getJournal() != null) updatedDog.setJournal(updates.getJournal());
 
         breedRepository.save(breed);
+        journalRepository.save(updates.getJournal());
 
         return repository.save(updatedDog);
 

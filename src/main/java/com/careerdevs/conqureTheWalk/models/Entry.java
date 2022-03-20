@@ -12,27 +12,23 @@ public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String duration;
-//    private String goal;
+    private String type;
+    private String activity;
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-//    @ManyToOne( cascade = CascadeType.ALL)
-//    @JoinColumn(name = "activity_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties("id")
-//    private Activity activity;
 
     @ManyToOne
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
 //    @JsonIncludeProperties("id")
-    @JsonIgnore
+//    @JsonIgnore
     private Journal journal;
 
     public Entry() {}
 
-    public Entry(Timestamp timestamp, String duration) {
+    public Entry(Timestamp timestamp, String type, String activity) {
         this.timestamp = timestamp;
-//        this.activity = activity;
-        this.duration = duration;
+        this.activity = activity;
+        this.type = type;
     }
 
     public Long getId() {
@@ -51,20 +47,12 @@ public class Entry {
         this.timestamp = timestamp;
     }
 
-//    public Activity getActivity() {
-//        return activity;
-//    }
-//
-//    public void setActivity(Activity activity) {
-//        this.activity = activity;
-//    }
-
-    public String getDuration() {
-        return duration;
+    public String getType() {
+        return type;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Journal getJournal() {
@@ -73,5 +61,13 @@ public class Entry {
 
     public void setJournal(Journal journal) {
         this.journal = journal;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }

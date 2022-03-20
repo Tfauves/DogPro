@@ -83,17 +83,7 @@ public class ProfileController {
 //        }
 //        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
 //        newProfile.setAvatar(avatar);
-// TODO: 2/25/2022 get dogs
-//
-//        if ( newProfile.getMyDogs() != null ) {
-//            for (Dog dogs : newProfile.getMyDogs()) {
-//                dogs.setOwner(newProfile);
-//                dogs.setBreed(dogs.getBreed());
-//                dogRepository.save(dogs);
-//                breedRepository.saveAll(dogs.getBreed());
-//            }
-//
-//        }
+
 
 
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
