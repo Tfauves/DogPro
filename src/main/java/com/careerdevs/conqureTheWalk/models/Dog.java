@@ -17,9 +17,9 @@ public class Dog {
     private Integer weight;
     private String sex;
 
-//    @OneToMany
-//    private Set<Breed> breed;
+
     @OneToOne
+    @JsonIgnoreProperties("id")
     private Breed breed;
 
     @OneToOne
@@ -34,6 +34,7 @@ public class Dog {
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "dog")
     @JoinColumn(name = "journal_id")
     @JsonIgnoreProperties("dog")
+
     private Journal journal;
 
     public Dog() {}
