@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
+// TODO: 3/19/2022 journal id is not in sql table?????? 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/journal")
