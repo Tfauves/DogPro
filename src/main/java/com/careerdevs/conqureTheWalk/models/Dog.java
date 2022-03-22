@@ -32,7 +32,7 @@ public class Dog {
     private Profile owner;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "dog")
-    @JoinColumn(name = "journal_id")
+    @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIgnoreProperties("dog")
     private Journal journal;
 
