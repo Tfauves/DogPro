@@ -20,7 +20,6 @@ public class Journal {
 //    @JoinColumn(name = "journal_id", referencedColumnName = "id")
 //    @JsonIgnoreProperties("id")
 //    private Set<Entry> entry;
-
     public Journal() {}
 
     public Journal(Dog dog) {
