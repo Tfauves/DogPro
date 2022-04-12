@@ -74,8 +74,9 @@ public class ProfileController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         newProfile.setUser(currentUser);
-// TODO: 2/25/2022 avatar breaks frontend
 
+        // TODO: 4/12/2022 avatar breaking front end 
+        
 //        if (newProfile.getAvatar() != null) {
 //            Avatar avatar = newProfile.getAvatar();
 //            avatar.setUrl(newProfile.getAvatar().getUrl());
