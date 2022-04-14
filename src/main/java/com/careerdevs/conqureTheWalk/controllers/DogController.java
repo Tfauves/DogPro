@@ -95,13 +95,6 @@ public class DogController {
 
     }
 
-//    @PutMapping("/breed/{dId}")
-//    public @ResponseBody Dog addBreedToDog(@PathVariable Long dId, @RequestBody Breed dogBreed) {
-//        Dog updateDog = repository.findById(dId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//
-//
-//    }
-
     @PutMapping("/{id}")
     public @ResponseBody Dog updateDog(@PathVariable Long id, @RequestBody Dog updates) {
         Dog updatedDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
