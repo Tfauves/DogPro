@@ -51,7 +51,7 @@ public class DogController {
         if (currentUser == null) {
             return null;
         }
-        Profile profile = profileRepository.getById(currentUser.getId());
+        Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return profile.getMyDogs();
 
     }
@@ -115,7 +115,7 @@ public class DogController {
         if(updates.getJournal() != null) updatedDog.setJournal(updates.getJournal());
 
         breedRepository.save(breed);
-        journalRepository.save(updates.getJournal());
+//        journalRepository.save(updates.getJournal());
 
         return repository.save(updatedDog);
 
