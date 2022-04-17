@@ -18,7 +18,7 @@ public class Profile {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
 //    @JsonIgnoreProperties("owner")
     //how to ignore breed id
-    @JsonIncludeProperties({"name", "id", "avatar, breed"})
+    @JsonIncludeProperties({"name", "id", "avatar"})
     private Set<Dog> myDogs;
 
     @OneToOne
