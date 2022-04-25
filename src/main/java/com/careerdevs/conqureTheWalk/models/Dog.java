@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
-import java.util.Set;
+
 
 @Entity
 public class Dog {
@@ -38,13 +38,14 @@ public class Dog {
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal) {
+    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal, Breed breed) {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
         this.owner = owner;
         this.journal = journal;
+        this.breed = breed;
 
     }
 
@@ -87,14 +88,6 @@ public class Dog {
     public void setSex(String sex) {
         this.sex = sex;
     }
-
-//    public Set<Breed> getBreed() {
-//        return breed;
-//    }
-//
-//    public void setBreed(Set<Breed> breed) {
-//        this.breed = breed;
-//    }
 
     public Profile getOwner() {
         return owner;

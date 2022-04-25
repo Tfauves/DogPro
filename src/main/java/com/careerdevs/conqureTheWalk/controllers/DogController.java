@@ -70,10 +70,12 @@ public class DogController {
         }
         Profile profile = profileRepository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Journal newJournal = journalRepository.save(newDog.getJournal());
+        Breed breed = breedRepository.save(newDog.getBreed());
 
         newJournal.setDog(newDog);
         newDog.setOwner(profile);
         newDog.setJournal(newJournal);
+        newDog.setBreed(breed);
 
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
