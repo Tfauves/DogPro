@@ -4,12 +4,15 @@ import com.careerdevs.conqureTheWalk.models.*;
 import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.*;
 import com.careerdevs.conqureTheWalk.services.UserService;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Set;
 
@@ -35,9 +38,23 @@ public class DogController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @Autowired
+    EntityManager entityManager;
+
+    @GetMapping("/all")
     public @ResponseBody List<Dog> getAllDogs() {
        return repository.findAll();
+    }
+
+    @GetMapping
+    public Iterable<Dog> readAllProfile(boolean isDeleted) {
+        Session session = entityManager.unwrap(Session.class);
+        Filter filter = session.enableFilter("deletedDogFilter");
+        //Here we add the isDeleted parameter that we'll add to the object Filter affecting the process of reading the Product entity.
+        filter.setParameter("isDeleted", isDeleted);
+        Iterable<Dog> dog = repository.findAll();
+        session.disableFilter("deletedProfileFilter");
+        return dog;
     }
 
     @GetMapping("/{id}")
@@ -116,9 +133,24 @@ public class DogController {
 
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> destroyDog(@PathVariable long id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDog(@PathVariable Long id) {
         repository.deleteById(id);
-        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
+
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> destroyDog(@PathVariable long id) {
+//        repository.deleteById(id);
+//        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+//    }
 }
