@@ -3,11 +3,24 @@ package com.careerdevs.conqureTheWalk.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
 
 @Entity
+@Table(name = "dog")
+// @SQLDelete annotation to override the delete command.
+// that changes the deleted field value to true instead of deleting the data permanently.
+@SQLDelete(sql = "UPDATE dog SET deleted = true WHERE id =?")
+//still want the deleted data to be accessible.
+//these annotations can dynamically add conditions as needed:
+//@FilterDef annotation defines the basic requirements that will be used by @Filter annotation
+@FilterDef(name = "deletedDogFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
+@Filter(name = "deletedDogFilter", condition = "deleted = :isDeleted")
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +29,9 @@ public class Dog {
     private Integer age;
     private Integer weight;
     private String sex;
+
+    //deleted property with the default value set as FALSE
+    private Boolean deleted = Boolean.FALSE;
 
 
     @OneToOne
@@ -119,5 +135,13 @@ public class Dog {
 
     public void setBreed(Breed breed) {
         this.breed = breed;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }
