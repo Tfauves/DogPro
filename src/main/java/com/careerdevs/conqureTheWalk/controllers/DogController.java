@@ -148,9 +148,4 @@ public class DogController {
         this.entityManager = entityManager;
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> destroyDog(@PathVariable long id) {
-//        repository.deleteById(id);
-//        return new ResponseEntity<>("Deleted", HttpStatus.OK);
-//    }
 }
