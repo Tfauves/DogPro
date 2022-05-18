@@ -19,6 +19,7 @@ public class Profile {
 //    @JsonIgnoreProperties("owner")
     //how to ignore breed id
     @JsonIncludeProperties({"name", "id", "avatar"})
+    @OrderBy("name ASC")
     private Set<Dog> myDogs;
 
     @OneToOne
