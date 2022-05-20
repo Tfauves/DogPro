@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,8 +17,6 @@ public class Profile {
     private String name;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties("owner")
-    //how to ignore breed id
     @JsonIncludeProperties({"name", "id", "avatar"})
     @OrderBy("name ASC")
     private Set<Dog> myDogs;
