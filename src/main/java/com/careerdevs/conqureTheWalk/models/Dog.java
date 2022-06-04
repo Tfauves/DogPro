@@ -38,7 +38,7 @@ public class Dog {
     @JsonIgnoreProperties("id")
     private Breed breed;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties("id")
     private Avatar avatar;
 
@@ -54,7 +54,7 @@ public class Dog {
 
     public Dog() {}
 
-    public Dog(String name, Integer age, Integer weight, String sex, Profile owner, Journal journal, Breed breed) {
+    public Dog(String name, Avatar avatar, Integer age, Integer weight, String sex, Profile owner, Journal journal, Breed breed) {
         this.name = name;
         this.age = age;
         this.weight = weight;
@@ -62,6 +62,7 @@ public class Dog {
         this.owner = owner;
         this.journal = journal;
         this.breed = breed;
+        this.avatar = avatar;
 
     }
 
