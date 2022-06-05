@@ -16,10 +16,10 @@ public class Journal {
     @JsonIncludeProperties("id")
     private Dog dog;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "journal_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties("id")
-//    private Set<Entry> entry;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "journal_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("id")
+    private Set<Entry> entry;
     public Journal() {}
 
     public Journal(Dog dog) {
@@ -34,13 +34,13 @@ public class Journal {
         this.id = id;
     }
 
-//    public Set<Entry> getEntry() {
-//        return entry;
-//    }
-//
-//    public void setEntry(Set<Entry> entry) {
-//        this.entry = entry;
-//    }
+    public Set<Entry> getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Set<Entry> entry) {
+        this.entry = entry;
+    }
 
 
     public Dog getDog() {
@@ -50,4 +50,6 @@ public class Journal {
     public void setDog(Dog dog) {
         this.dog = dog;
     }
+
+
 }

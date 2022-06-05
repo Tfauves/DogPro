@@ -50,7 +50,7 @@ public class JournalController {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
 
-
+    // TODO: 6/5/2022 journal entry not working
     //update journal
     @PutMapping("/entry/{journalId}")
     public @ResponseBody Entry addEntry(@PathVariable Long journalId, @RequestBody Entry journalEntry) {
