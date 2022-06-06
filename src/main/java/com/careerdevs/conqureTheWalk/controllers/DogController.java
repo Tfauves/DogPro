@@ -134,11 +134,13 @@ public class DogController {
 
     }
 
-    // TODO: 6/5/2022 need fix issue with soft delete not working as expected 
-    @DeleteMapping("{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDog(@PathVariable Long id) {
-        repository.deleteById(id);
-        return new ResponseEntity<>("deleted", HttpStatus.OK);
+        Dog deleteDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        deleteDog.setDeleted(true);
+        repository.save(deleteDog);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
 
