@@ -33,6 +33,7 @@ public class DogBreedApiController {
    String uri = "https://api.thedogapi.com/v1/breeds/search" + "?q=" + q + "&api_key=" + apiKey;
 
 
+
         List<BreedInfo> response = Arrays.asList(restTemplate.getForObject(uri, BreedInfo[].class));
         return ResponseEntity.ok(response);
     }
