@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
-// TODO: 3/19/2022 journal id is not in sql table?????? 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/journal")
@@ -26,10 +25,6 @@ public class JournalController {
     @Autowired
     private EntryRepository entry_repository;
 
-    @Autowired
-    private ActivityRepository activityRepository;
-
-    @Autowired
 
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -50,24 +45,13 @@ public class JournalController {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
 
-    // TODO: 6/5/2022 journal entry not working
-    //update journal
-    @PutMapping("/entry/{journalId}")
-    public @ResponseBody Entry addEntry(@PathVariable Long journalId, @RequestBody Entry journalEntry) {
-        Journal journal = repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        journalEntry.setJournal(journal);
-
-        repository.save(journal);
-
-        return entry_repository.save(journalEntry);
-    }
 
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
         Journal journal = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-//        if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
+       if (updateData.getEntry() != null) journal.setEntry(updateData.getEntry());
         if (updateData.getDog()!= null) journal.setDog(updateData.getDog());
 
         return repository.save(journal);
