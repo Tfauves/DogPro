@@ -4,10 +4,9 @@ import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
-
 import javax.persistence.*;
 import java.util.Set;
+
 
 @Entity
 public class Profile {

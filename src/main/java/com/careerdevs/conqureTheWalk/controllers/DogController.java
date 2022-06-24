@@ -9,16 +9,17 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Set;
 
+
 @CrossOrigin
 @RestController
-@RequestMapping("/api/dogs")
+@RequestMapping("/api/dog")
 public class DogController {
     @Autowired
     private DogRepository repository;
@@ -72,11 +73,6 @@ public class DogController {
         return profile.getMyDogs();
     }
 
-    @PostMapping
-    public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
-        return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
-    }
-
     @PostMapping("/new")
     public ResponseEntity<Dog> createDogWithJournal(@RequestBody Dog newDog) {
         User currentUser = userService.getCurrentUser();
@@ -98,8 +94,40 @@ public class DogController {
         return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public @ResponseBody Dog updateDog(@PathVariable Long id, @RequestBody Dog updates) {
+        Dog updatedDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Breed breed = updates.getBreed();
+
+        if (updates.getName() != null) updatedDog.setName(updates.getName());
+        if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
+        if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
+        if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
+        if (updates.getBreed() != null) updatedDog.setBreed(breed);
+
+        breedRepository.save(breed);
+        return repository.save(updatedDog);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDog(@PathVariable Long id) {
+        Dog deleteDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        deleteDog.setDeleted(true);
+        repository.save(deleteDog);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @PostMapping("/photo/{dId}")
-    public Dog addPhoto(@PathVariable Long dId, @RequestBody Dog avadog) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public Dog addPhotoToDogById(@PathVariable Long dId, @RequestBody Dog avadog) {
 
         Dog dog = repository.findById(dId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -115,41 +143,11 @@ public class DogController {
 
     }
 
-    @PutMapping("/{id}")
-    public @ResponseBody Dog updateDog(@PathVariable Long id, @RequestBody Dog updates) {
-        Dog updatedDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Breed breed = updates.getBreed();
-
-        if (updates.getName() != null) updatedDog.setName(updates.getName());
-        if (updates.getAge() != null) updatedDog.setAge(updates.getAge());
-        if (updates.getWeight() != null) updatedDog.setWeight(updates.getWeight());
-        if (updates.getSex() != null) updatedDog.setSex(updates.getSex());
-        if (updates.getBreed() != null) updatedDog.setBreed(breed);
-        if(updates.getJournal() != null) updatedDog.setJournal(updates.getJournal());
-
-        breedRepository.save(breed);
-//        journalRepository.save(updates.getJournal());
-
-        return repository.save(updatedDog);
-
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Dog> createDog(@RequestBody Dog newDog) {
+        return new ResponseEntity<>(repository.save(newDog), HttpStatus.CREATED);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDog(@PathVariable Long id) {
-        Dog deleteDog = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        deleteDog.setDeleted(true);
-        repository.save(deleteDog);
-        return new ResponseEntity<>("Deleted", HttpStatus.OK);
-    }
-
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
 }
