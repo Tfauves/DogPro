@@ -1,24 +1,14 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
-
-import com.careerdevs.conqureTheWalk.models.Activity;
 import com.careerdevs.conqureTheWalk.models.Entry;
-import com.careerdevs.conqureTheWalk.models.Journal;
-import com.careerdevs.conqureTheWalk.models.Profile;
-import com.careerdevs.conqureTheWalk.models.auth.User;
-import com.careerdevs.conqureTheWalk.repositories.ActivityRepository;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
-import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
-import com.careerdevs.conqureTheWalk.repositories.ProfileRepository;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -26,9 +16,6 @@ import java.util.Set;
 public class EntryController {
     @Autowired
     private EntryRepository repository;
-
-    @Autowired
-    private ActivityRepository activityRepository;
 
     @Autowired
     private UserService userService;
@@ -40,7 +27,6 @@ public class EntryController {
 
     @PostMapping
     public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
-
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
 
@@ -50,7 +36,6 @@ public class EntryController {
 
         if (updateData.getType() != null) entry.setType(updateData.getType());
         if (updateData.getActivity() != null) entry.setActivity(updateData.getActivity());
-
         return repository.save(entry);
     }
 
