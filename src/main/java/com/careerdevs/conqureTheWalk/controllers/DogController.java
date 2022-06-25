@@ -73,6 +73,7 @@ public class DogController {
         return profile.getMyDogs();
     }
 
+    // TODO: 6/25/2022 breed should be brought in by id @ some point 
     @PostMapping("/new")
     public ResponseEntity<Dog> createDogWithJournal(@RequestBody Dog newDog) {
         User currentUser = userService.getCurrentUser();

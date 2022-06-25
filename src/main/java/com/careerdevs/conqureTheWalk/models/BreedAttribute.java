@@ -1,7 +1,7 @@
 package com.careerdevs.conqureTheWalk.models;
 
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
+// TODO: 6/24/2022 all of breed/ all of breed attribute/all journal/all entry 
 import javax.persistence.*;
 
 @Entity

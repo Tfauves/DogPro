@@ -1,6 +1,5 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
-
 import com.careerdevs.conqureTheWalk.models.Breed;
 import com.careerdevs.conqureTheWalk.repositories.BreedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
+
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/breeds")
+@RequestMapping("/api/breed")
 public class BreedController {
     @Autowired
     private BreedRepository repository;
