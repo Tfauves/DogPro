@@ -1,13 +1,11 @@
 package com.careerdevs.conqureTheWalk.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.SQLDelete;
-
 import javax.persistence.*;
 
 
@@ -32,7 +30,6 @@ public class Dog {
 
     //deleted property with the default value set as FALSE
     private Boolean deleted = Boolean.FALSE;
-
 
     @OneToOne
     @JsonIgnoreProperties("id")
