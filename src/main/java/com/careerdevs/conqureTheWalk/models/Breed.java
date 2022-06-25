@@ -3,7 +3,6 @@ package com.careerdevs.conqureTheWalk.models;
 import javax.persistence.*;
 
 
-
 @Entity
 public class Breed {
     @Id

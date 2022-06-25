@@ -22,6 +22,11 @@ public class BreedController {
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody Breed getById(@PathVariable Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping
     public ResponseEntity<Breed> createBreed(@RequestBody Breed newBreed) {
         return new ResponseEntity<>(repository.save(newBreed), HttpStatus.CREATED);
