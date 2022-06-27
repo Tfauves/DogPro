@@ -19,7 +19,7 @@ public class Journal {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIgnoreProperties("id")
-    private Set<Entry> entry;
+    public Set<Entry> entry;
     public Journal() {}
 
     public Journal(Dog dog) {
