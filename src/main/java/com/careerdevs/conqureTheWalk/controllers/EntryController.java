@@ -1,7 +1,9 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
 import com.careerdevs.conqureTheWalk.models.Entry;
+import com.careerdevs.conqureTheWalk.models.EntryType;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
+import com.careerdevs.conqureTheWalk.repositories.EntryTypeRepository;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,7 @@ public class EntryController {
 
     @PostMapping
     public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
+
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }
 

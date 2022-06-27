@@ -60,7 +60,6 @@ public class Dog {
         this.journal = journal;
         this.breed = breed;
         this.avatar = avatar;
-
     }
 
     public Long getId() {
