@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-// TODO: 6/26/2022 map entrytype to entry and put into journal 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/entryType")
