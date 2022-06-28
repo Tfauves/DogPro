@@ -1,24 +1,20 @@
 package com.careerdevs.conqureTheWalk.models;
 
-
-
 import javax.persistence.*;
 import java.sql.Timestamp;
+
 
 @Entity
 public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String activity;
-    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     @OneToOne
     private EntryType type;
 
-    @ManyToOne
-    @JoinColumn(name = "journal_id", referencedColumnName = "id")
-    private Journal journal;
+    private String activity;
+    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     public Entry() {}
 
@@ -42,14 +38,6 @@ public class Entry {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Journal getJournal() {
-        return journal;
-    }
-
-    public void setJournal(Journal journal) {
-        this.journal = journal;
     }
 
     public String getActivity() {

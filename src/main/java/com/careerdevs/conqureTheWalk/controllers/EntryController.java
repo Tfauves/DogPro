@@ -2,8 +2,10 @@ package com.careerdevs.conqureTheWalk.controllers;
 
 import com.careerdevs.conqureTheWalk.models.Entry;
 import com.careerdevs.conqureTheWalk.models.EntryType;
+import com.careerdevs.conqureTheWalk.models.Journal;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.EntryTypeRepository;
+import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import com.careerdevs.conqureTheWalk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -20,6 +23,12 @@ public class EntryController {
     private EntryRepository repository;
 
     @Autowired
+    EntryTypeRepository entryTypeRepository;
+
+    @Autowired
+    JournalRepository journalRepository;
+
+    @Autowired
     private UserService userService;
 
     @GetMapping
@@ -27,8 +36,12 @@ public class EntryController {
         return repository.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<Entry> createEntry(@RequestBody Entry newEntry) {
+    @PostMapping("/{jId}")
+    public ResponseEntity<Entry> createEntry(@PathVariable Long jId, @RequestBody Entry newEntry) {
+        Journal journal = journalRepository.findById(jId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        EntryType type = entryTypeRepository.findById(newEntry.getType().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        newEntry.setType(type);
+        journal.entry.add(newEntry);
 
         return new ResponseEntity<>(repository.save(newEntry), HttpStatus.CREATED);
     }

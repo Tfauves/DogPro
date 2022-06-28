@@ -6,9 +6,11 @@ import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -23,25 +25,20 @@ public class JournalController {
 
 
     @GetMapping
-//    @PreAuthorize("hasRole('ADMIN')")
     public List<Journal> getAll() {
         return repository.findAll();
     }
 
-    //get journal by id
     @GetMapping("/{journalId}")
     public @ResponseBody
     Journal getById(@PathVariable Long journalId) {
         return repository.findById(journalId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    //create a journal
     @PostMapping
     public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal) {
         return new ResponseEntity<>(repository.save(newJournal), HttpStatus.CREATED);
     }
-
-
 
     @PutMapping("/{id}")
     public @ResponseBody Journal updateJournal(@PathVariable Long id, @RequestBody Journal updateData) {
@@ -53,9 +50,8 @@ public class JournalController {
         return repository.save(journal);
     }
 
-    //delete journal
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> destroyJournal(@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);

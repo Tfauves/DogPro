@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "dog")
 // @SQLDelete annotation to override the delete command.
-// that changes the deleted field value to true instead of deleting the data permanently.
+// Changes the deleted field value to true instead of deleting the data permanently.
 @SQLDelete(sql = "UPDATE dog SET deleted = true WHERE id =?")
-//still want the deleted data to be accessible.
-//these annotations can dynamically add conditions as needed:
-//@FilterDef annotation defines the basic requirements that will be used by @Filter annotation
+// Still want the deleted data to be accessible.
+// These annotations can dynamically add conditions as needed:
+// @FilterDef annotation defines the basic requirements that will be used by @Filter annotation
 @FilterDef(name = "deletedDogFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedDogFilter", condition = "deleted = :isDeleted")
 public class Dog {
