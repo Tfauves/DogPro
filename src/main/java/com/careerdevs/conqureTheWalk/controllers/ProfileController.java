@@ -55,6 +55,16 @@ public class ProfileController {
     }
 
     @PostMapping
+    public ResponseEntity<Profile> createBasicProfile(@RequestBody Profile newProfile) {
+        User currentUser = userService.getCurrentUser();
+        if(currentUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        newProfile.setUser(currentUser);
+        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/new")
     public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
         User currentUser = userService.getCurrentUser();
 
