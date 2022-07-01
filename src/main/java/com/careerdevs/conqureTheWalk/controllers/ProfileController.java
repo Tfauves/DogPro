@@ -64,27 +64,50 @@ public class ProfileController {
         return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
+    @PutMapping("/photo")
+    public Profile addPhoto(@RequestBody Profile pro) {
+
         User currentUser = userService.getCurrentUser();
 
         if (currentUser == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return null;
         }
-        newProfile.setUser(currentUser);
-        
-        if (newProfile.getAvatar() != null) {
-            Avatar avatar = newProfile.getAvatar();
-            avatar.setUrl(newProfile.getAvatar().getUrl());
+
+        Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (profile.getAvatar() != null) {
+            Avatar avatar = profile.getAvatar();
+            avatar.setUrl(pro.getAvatar().getUrl());
             avatarRepository.save(avatar);
+            return profile;
         }
-        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
-        newProfile.setAvatar(avatar);
+        Avatar avatar = avatarRepository.save(pro.getAvatar());
+        profile.setAvatar(avatar);
+        return repository.save(profile);
 
-        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
     }
+    // original create profile mapping, separated into two mappings
+//    @PostMapping
+//    public ResponseEntity<Profile> createProfile(@RequestBody Profile newProfile) {
+//        User currentUser = userService.getCurrentUser();
+//
+//        if (currentUser == null) {
+//            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//        }
+//        newProfile.setUser(currentUser);
+//
+//        if (newProfile.getAvatar() != null) {
+//            Avatar avatar = newProfile.getAvatar();
+//            avatar.setUrl(newProfile.getAvatar().getUrl());
+//            avatarRepository.save(avatar);
+//        }
+//        Avatar avatar = avatarRepository.save(newProfile.getAvatar());
+//        newProfile.setAvatar(avatar);
+//
+//        return new ResponseEntity<>(repository.save(newProfile), HttpStatus.CREATED);
+//    }
 
-    @PatchMapping
+    @PutMapping
     public @ResponseBody Profile updateProfile(@RequestBody Profile updateData) {
 
         User currentUser = userService.getCurrentUser();
@@ -125,26 +148,7 @@ public class ProfileController {
         return repository.findAll();
     }
 
-    @PatchMapping("/photo")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Profile updatePhoto(@RequestBody Profile pro) {
 
-        User currentUser = userService.getCurrentUser();
-        if (currentUser == null) {
-            return null;
-        }
-        Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        if (profile.getAvatar() != null) {
-            Avatar avatar = profile.getAvatar();
-            avatar.setUrl(pro.getAvatar().getUrl());
-            avatarRepository.save(avatar);
-            return profile;
-        }
-        Avatar avatar = avatarRepository.save(pro.getAvatar());
-        profile.setAvatar(avatar);
-        return repository.save(profile);
-    }
 
     @PutMapping("/dog/{id}")
     @PreAuthorize("hasRole('ADMIN')")

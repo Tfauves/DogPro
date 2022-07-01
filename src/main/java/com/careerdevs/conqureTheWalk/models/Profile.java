@@ -35,6 +35,7 @@ public class Profile {
         this.user = user;
         this.name = name;
         this.avatar = avatar;
+
     }
 
     public Long getId() {
