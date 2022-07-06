@@ -117,7 +117,6 @@ public class ProfileController {
         Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updateData.getName() != null) profile.setName(updateData.getName());
-        if (updateData.getMyDogs() != null) profile.setMyDogs(updateData.getMyDogs());
         if (updateData.getAvatar() != null) {
             Avatar avatar = profile.getAvatar();
             avatar.setUrl(updateData.getAvatar().getUrl());
