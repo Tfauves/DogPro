@@ -1,6 +1,7 @@
 package com.careerdevs.conqureTheWalk.controllers;
 
 import com.careerdevs.conqureTheWalk.models.Journal;
+import com.careerdevs.conqureTheWalk.models.auth.User;
 import com.careerdevs.conqureTheWalk.repositories.EntryRepository;
 import com.careerdevs.conqureTheWalk.repositories.JournalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
