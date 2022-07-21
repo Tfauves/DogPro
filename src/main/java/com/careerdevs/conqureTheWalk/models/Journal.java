@@ -20,7 +20,8 @@ public class Journal {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "journal_id", referencedColumnName = "id")
     @JsonIgnoreProperties("id")
-    @OrderBy("timestamp ASC")
+    @OrderBy("timestamp DESC, type")
+//    @OrderBy("timestamp ASC")
     public Set<Entry> entry;
     public Journal() {}
 

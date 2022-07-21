@@ -2,6 +2,7 @@ package com.careerdevs.conqureTheWalk.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 @Entity
