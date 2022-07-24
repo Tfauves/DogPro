@@ -28,4 +28,6 @@ public class EntryTypeController {
     public @ResponseBody List<EntryType> readAllEntryTypes() {
         return repository.findAll();
     }
+
+
 }
