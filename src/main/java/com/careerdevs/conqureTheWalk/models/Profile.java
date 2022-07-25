@@ -63,7 +63,10 @@ public class Profile {
     }
 
     public Set<Dog> getMyDogs() {
-        myDogs.removeIf(dog -> dog.getDeleted() == Boolean.TRUE);
+        if (myDogs != null) {
+            myDogs.removeIf(dog -> dog.getDeleted() == Boolean.TRUE);
+        }
+
         return myDogs;
 
     }
