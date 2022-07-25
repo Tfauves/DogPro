@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
+import java.util.Objects;
 
 
 @CrossOrigin
@@ -115,15 +116,15 @@ public class ProfileController {
             return null;
         }
         Profile profile = repository.findByUser_id(currentUser.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        if (updateData.getName() != null) profile.setName(updateData.getName());
-        if (updateData.getAvatar() != null) {
-            Avatar avatar = profile.getAvatar();
+        Avatar avatar = profile.getAvatar();
+        if (!Objects.equals(updateData.getName(), "")) profile.setName(updateData.getName());
+        if (updateData.getAvatar().getUrl() != null) {
+            avatar = profile.getAvatar();
             avatar.setUrl(updateData.getAvatar().getUrl());
             avatarRepository.save(avatar);
         }
-        Avatar avatar = avatarRepository.save(updateData.getAvatar());
-        profile.setAvatar(avatar);
+
+       profile.setAvatar(avatar);
         return repository.save(profile);
     }
 
